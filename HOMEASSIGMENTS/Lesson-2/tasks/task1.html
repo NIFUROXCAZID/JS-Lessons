@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№2</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у формі таблиці</p>
+
+    <script>
+        let num1 = parseInt(prompt('Введіть num1'))
+        let num2 = parseInt(prompt('Введіть num2'))
+
+        let sum = num1 + num2
+        let product = num1 * num2
+        let quotient = num1 / num2
+
+        document.write("<table border='1'>")
+        document.write("<tr><th>Операція</th><th>Результат</th></tr>")
+        document.write("<tr><td>Сума</td><td>" + sum + "</td></tr>")
+        document.write("<tr><td>Добуток</td><td>" + product + "</td></tr>")
+        document.write("<tr><td>Частка</td><td>" + quotient + "</td></tr>")
+        document.write("</table>")
+
+    </script>
+</body>
+
+</html>

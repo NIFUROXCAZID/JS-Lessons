@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№2</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.</p>
+
+    <script>
+        let firstProductPrice = parseInt(prompt('Ціна першого товару', "100"))
+        let firstProductQuantity = parseInt(prompt('Кількість одиниць першого товару', 1))
+        let secondProductPrice = parseInt(prompt('Ціна другого товару', "100"))
+        let secondProductQuantity = parseInt(prompt('Кількість одиниць другого товару', 1))
+        let thirdProductPrice = parseInt(prompt('Ціна третього товару', "100"))
+        let thirdProductQuantity = parseInt(prompt('Кількість одиниць третього товару', 1))
+
+        let firstFullPrice = firstProductPrice * firstProductQuantity
+        let secondFullPrice = secondProductPrice * secondProductQuantity
+        let thirdFullPrice = thirdProductPrice * thirdProductQuantity
+
+        let generealPrice = firstFullPrice + secondFullPrice + thirdFullPrice
+
+        document.write("<h2'>Магазин АУТдейт маркет</h2>");
+        document.write("<div>М. Тернопіль Ул. Гіркої дупки огірка</div>");
+        document.write("<table>")
+        document.write("<tr><th>Товар</th><th>Кількість</th><th>Ціна</th></tr>")
+        document.write(`<tr><th>Цукерки "Жуй=блюй"</th><th>Кількість = ` + firstProductQuantity + `</th><th>Ціна за ` + firstProductQuantity + ` X = ` + firstFullPrice + `</th></tr>`)
+        document.write(`<tr><th>Напій "Печія"</th><th>Кількість = ` + secondProductQuantity + `</th><th>Ціна за ` + secondProductQuantity + ` X = ` + secondFullPrice + `</th></tr>`)
+        document.write(`<tr><th>Сосиски "ඞАМОГУСඞ"</th><th>Кількість = ` + thirdProductQuantity + `</th><th>Ціна за ` + thirdProductQuantity + ` X = ` + thirdFullPrice + `</th></tr>`)
+        document.write("</table>")
+        document.write(`<div>Загальна вартість = ` + generealPrice + `</div>`);
+
+    </script>
+</body>
+
+</html>

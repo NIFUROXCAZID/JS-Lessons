@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№2</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.</p>
+
+    <script>
+        let secondsGone = parseInt(prompt('Введіть кількість секунд що пройшло з початку дня'))
+        const secondsDay = 86400
+
+        if (secondsGone > secondsDay) {
+            document.write(`Це забагато секунд ми залишимо лише ті, що є в цьому дні. <br>`)
+        }
+        while (secondsGone > secondsDay) {
+            secondsGone = secondsGone - secondsDay
+        }
+
+        let goneHours = Math.floor(secondsGone / 60 / 60)
+        let goneMinutes = Math.floor((secondsGone - goneHours * 60 * 60) / 60)
+        let leftSeconds = secondsGone - (goneHours * 60 * 60) - (goneMinutes * 60)
+
+        document.write(`Дано ${secondsGone} секунд. <br> Це буде ${goneHours} годин, <br> і ${goneMinutes} хвилин  <br> і ще залишеться ${leftSeconds} секунд <br> <br>`)
+
+    </script>
+</body>
+
+</html>
