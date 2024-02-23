@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№3</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.</p>
+
+    <script>
+        let productPrice = parseFloat(prompt(`Введіть ціну товару: `))
+        let moneyAmount = parseFloat(prompt(`Введіть кількість грошей: `))
+        const lotteryPrice = 4
+
+        if (productPrice > moneyAmount) {
+            document.write(`Цих ${moneyAmount} недостатньо щоб купити товар вартістю в ${productPrice}`)
+        } else if (moneyAmount - productPrice >= lotteryPrice) {
+            document.write(`Чотири на японській мові звучить як смерть, пропонуємо перевірити смертельну вдачу в лотереї за ${lotteryPrice} грн`)
+        } else {
+            document.write(`Дякую за покупку`)
+        }
+
+    </script>
+</body>
+
+</html>

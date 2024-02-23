@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№3</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        const min = 1
+        const max = 5
+        let randomNumber = getRandomInt(min, max);
+
+        // alert(`Рандомне число ${randomNumber}`)
+        for (let i = 1; i < 3; i++) {
+            let userNumber = parseInt(prompt(`Вгадайте число спроба ${i}: `))
+            if (userNumber < randomNumber) {
+                alert(`Ваше число ${userNumber} замаленьке`)
+            } else if (userNumber > randomNumber) {
+                alert(`Ваше число ${userNumber} завелике`)
+            } else if (userNumber == randomNumber) {
+                alert(`Ваше число ${userNumber} дорівнює ${randomNumber} ви вгадали`)
+                break
+            }
+        }
+    </script>
+</body>
+
+</html>

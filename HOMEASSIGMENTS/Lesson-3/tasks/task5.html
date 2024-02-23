@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№3</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>З клавіатури вводиться назва категорії водія (А-мотоцикл, В-легковий автомобіль, С-вантажний автомобіль). Вивести на екран назву транспортного засобу, яким він може керувати.</p>
+
+    <script>
+        let driveCategory = (prompt(`Введіть назву категорії прав водіння у вигляді букви A B або C англіських: `))
+
+        switch (driveCategory) {
+            case 'A':
+                document.write(`Категорія А-мотоцикл`)
+                break
+            case 'B':
+                document.write(`Категорія В-легковий автомобіль`)
+                break
+            case 'C':
+                document.write(`Категорія С-вантажний автомобіль`)
+                break
+            default:
+                document.write(`Невідома категорія`)
+                break
+        }
+    </script>
+</body>
+
+</html>
