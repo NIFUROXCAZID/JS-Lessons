@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№5</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>Задача 16. Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну величину прибутку та вивести величину прибутку протягом кожного окремого тижня.</p>
+
+    <script>
+        let totalProfit = 0
+        let profitWeeks = parseInt(prompt(`Введіть кількість тижнів для рахування прибутку: `))
+        for (let i = 1; i <= profitWeeks; i++) {
+            let weeklyProfit = 0
+            for (let profitDay = 1; profitDay <= 7; profitDay++) {
+                let dailyProfit = parseFloat(prompt(`Введіть прибуток для дня ${profitDay} тижня ${i}:`))
+                while (isNaN(dailyProfit)) {
+                    dailyProfit = parseFloat(prompt(`Введіть коректний прибуток для дня ${profitDay} тижня ${i}:`))
+                }
+                weeklyProfit += dailyProfit
+                totalProfit += dailyProfit
+            }
+            document.write(`Прибуток за тиждень ${i}: ${weeklyProfit.toFixed(2)}<br>`)
+        }
+        document.write(`Загальний прибуток: ${totalProfit.toFixed(2)}<br>`)
+    </script>
+
+</body>
+
+</html>

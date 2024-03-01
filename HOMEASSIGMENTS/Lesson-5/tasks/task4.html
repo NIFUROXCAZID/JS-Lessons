@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№5</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>13. Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач намагається потопити корабель.</p>
+
+    <script>
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let minN = 1;
+        let maxN = 4;
+        let randomN = getRandomInt(minN, maxN);
+
+        let minM = 1;
+        let maxM = 3;
+        let randomM = getRandomInt(minM, maxM);
+
+        let shells = parseInt(prompt(`Введіть кількість снарядів яку вам треба: `))
+        let destroyet = false
+        let scopeN = 0
+        let scopeM = 0
+        while (destroyet == false && shells > 0) {
+            scopeN = parseInt(prompt(`Налаштуйте приціл по лінії И від ${minN} до ${maxN}: `))
+            scopeM = parseInt(prompt(`Налаштуйте приціл по лінії M від ${minM} до ${maxM}: `))
+            alert(`ВОГОНЬ!!!`)
+            shells--
+
+            if (scopeN == randomN && scopeM == randomM) {
+                destroyet = true
+            } else {
+                alert(`Промах`)
+            }
+        }
+        if (destroyet == true) {
+            alert(`Вітаю ви виграли`)
+        } else {
+            alert(`Ви програли, снаряди закінчились`)
+        }
+    </script>
+</body>
+
+</html>

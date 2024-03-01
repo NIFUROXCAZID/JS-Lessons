@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№5</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>14. Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу повідомляють, яку ще суму потрібно ввести).</p>
+
+    <script>
+        let toPay = 455
+        let getPaid = 0
+        while (getPaid < toPay) {
+            getPaid += parseFloat(prompt(`Вам залишилось до сплати: ${toPay - getPaid}. Будь-ласка введіть суму:`))
+        }
+        alert(`Ура ви сплатили. Ваша решта ${getPaid - toPay}.`)
+    </script>
+</body>
+
+</html>
