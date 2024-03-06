@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№6</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>4. Побудувати ялинку
+        о
+        оо
+        ооо
+        оооо
+        ооооо
+        о
+        оо
+        ооо
+        оооо
+        ооооо
+        о
+        оо
+        ооо
+        оооо
+        ооооо
+
+    </p>
+
+    <script>    
+        let treeLevels = 3
+        let treeHeight = 5;
+        for (let i = 0; i < treeLevels; i++) {
+            for (let i = 0; i < treeHeight; i++) {
+                let row = '';
+
+                for (var j = 0; j <= i; j++) {
+                    row += 'о';
+                }
+                document.write(row + '<br>');
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

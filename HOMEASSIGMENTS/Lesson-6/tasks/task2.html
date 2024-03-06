@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№6</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>6. На екрані виводиться меню:
+        1.Ініціалізація (сума=0)
+        2.Додати 2
+        3.Додати 3
+        4.Відняти 2
+        5.Відняти 3.
+        6.Вивести суму
+        7.Вихід.
+        Шляхом поступового вибору відповідних пунктів спробувати отримати число N, яке вводиться з клавіатури.
+    </p>
+
+    <script>
+        let Nnumber = parseInt(prompt(`Введіть число N: `))
+        let guessNumber = 0
+
+        Menu: while (true) {
+            let move = parseInt(prompt(`Введіть номер дії 
+    1.Ініціалізація (сума=0)
+    2.Додати 2
+    3.Додати 3
+    4.Відняти 2
+    5.Відняти 3.
+    6.Вивести суму
+    7.Вихід.: `))
+
+            switch (move) {
+                case 1: {
+                    guessNumber = 0
+                    break
+                }
+                case 2: {
+                    guessNumber += 2
+                    break
+                }
+                case 3: {
+                    guessNumber += 3
+                    break
+                }
+                case 4: {
+                    guessNumber -= 2
+                    break
+                }
+                case 5: {
+                    guessNumber -= 3
+                    break
+                }
+                case 6: {
+                    alert(`${guessNumber}`)
+                    break
+                }
+                case 7: {
+                    break Menu
+                }
+            }
+        }
+        if (guessNumber == Nnumber) {
+            document.write(`Ура ви отримали необхідне число ${Nnumber}`)
+        } else {
+            document.write(`Ви не змогли отримати необхідне число ${Nnumber}`)
+        }
+    </script>
+</body>
+
+</html>

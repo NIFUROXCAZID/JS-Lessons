@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№6</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>11.1. Комп’ютер загадує два випадкових числа від 1 до 10. Вгадати обидва числа шляхом введеня можливих варіантів. В кінці вивести кількість спроб користувача.</p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let minNumber = 1;
+        let maxNumber = 10;
+        let randomOne = getRandomInt(minNumber, maxNumber);
+        let randomTwo = getRandomInt(minNumber, maxNumber);
+        let guessOne = false
+        let guessTwo = false
+        let userTryies = 0
+
+        while (guessOne == false || guessTwo == false) {
+            let userGuess = parseInt(prompt(`Вгадайте 2 числа від 1 до 10: `))
+            userTryies++
+            if (userGuess == randomOne) {
+                alert(`Ви вгадали перше число`)
+                guessOne = true
+            }
+            if (userGuess == randomTwo) {
+                alert(`Ви вгадали друге число`)
+                guessTwo = true
+            }
+        }
+        document.write(`Ура ви вгадали числа ${randomOne} і ${randomTwo}, ваша кількість спроб ${userTryies}`)
+    </script>
+</body>
+
+</html>
