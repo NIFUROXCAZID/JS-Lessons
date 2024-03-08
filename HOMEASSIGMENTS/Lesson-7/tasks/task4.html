@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№7</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>Задача 4. Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних, кількість додатних, кількість більших за 100.</p>
+
+    <script>
+        let num1 = parseInt(prompt(`Введіть перше число: `))
+        let num2 = parseInt(prompt(`Введіть друге число: `))
+        let num3 = parseInt(prompt(`Введіть третє число: `))
+
+        let pairs = (num1, num2, num3) => {
+            let count = 0
+            if (num1 % 2 === 0) count++
+            if (num2 % 2 === 0) count++
+            if (num3 % 2 === 0) count++
+            return count
+        }
+
+        let additional = (num1, num2, num3) => {
+            let count = 0
+            if (num1 > 0) count++
+            if (num2 > 0) count++
+            if (num3 > 0) count++
+            return count
+        }
+
+        let over100 = (num1, num2, num3) => {
+            let count = 0
+            if (num1 > 100) count++
+            if (num2 > 100) count++
+            if (num3 > 100) count++
+            return count
+        }
+
+        let ex4Function = (num1, num2, num3) => {
+            return document.write(`Кількість парних: ${pairs(num1, num2, num3)}. <br>
+                Кількість додатних: ${additional(num1, num2, num3)}. <br>
+                Кількість більше 100: ${over100(num1, num2, num3)}. <br>`)
+        }
+
+        ex4Function(num1, num2, num3)
+    </script>
+</body>
+
+</html>

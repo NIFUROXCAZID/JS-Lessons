@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№7</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>Задача 2. Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.</p>
+
+    <script>
+        let dayNum = parseInt(prompt(`Введіть номер дня від 1 до 7: `))
+        isWorkDay(dayNum)
+        function isWorkDay(dayNum) {
+            switch (dayNum) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5: {
+                    return document.write(`Це робочий день`)
+                    break
+                }
+                case 6:
+                case 7: {
+                    return document.write(`Це вихідний день`)
+                    break
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

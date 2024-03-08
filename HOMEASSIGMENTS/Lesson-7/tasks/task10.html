@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№7</title>
+</head>
+
+<body>
+    <h1>Задача 10</h1>
+    <p>
+        Задача 10. Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для додатних показів температури.
+    </p>
+
+    <script>
+        let temp1 = parseInt(prompt(`Введіть темпаратуру 1/4: `))
+        let temp2 = parseInt(prompt(`Введіть темпаратуру 2/4: `))
+        let temp3 = parseInt(prompt(`Введіть темпаратуру 3/4: `))
+        let temp4 = parseInt(prompt(`Введіть темпаратуру 4/4: `))
+
+        function outsideTemps() {
+            let countPositive = 0
+            let positivesSum = 0
+            let awaradge = 0
+            for (let i = 0; i < arguments.length; i++) {
+                if (arguments[i] > 0) countPositive++; positivesSum += arguments[i]
+                if (!countPositive == 0) awaradge = positivesSum / countPositive
+            }
+            return awaradge
+        }
+        document.write(`Середнє значення для додатних показів температури: ${outsideTemps(temp1, temp2, temp3, temp4)}`);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№7</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        Задача 5. Створити окремі функції, які переводять:
+    <ul>
+        <li>1) Сантиметри у дюйми;</li>
+        <li>2) Кілограми у фунти;</li>
+        <li>3) Кілометри у милі.</li>
+    </ul>
+    </p>
+
+    <script>
+        let сantimeters = parseInt(prompt(`Введіть сантиметри: `))
+        let kilograms = parseInt(prompt(`Введіть кілограми: `))
+        let kilometers = parseInt(prompt(`Введіть милі: `))
+
+        let toInch = (сantimeters) => {
+            return (сantimeters * 0.393701).toFixed(2);;
+        }
+        let toFunt = (kilograms) => {
+            return (kilograms * 2.20462).toFixed(2);;
+        }
+        let toMile = (kilometers) => {
+            return (kilometers * 0.621371).toFixed(2);;
+        }
+        document.write(`${сantimeters} сантиметрів це буде ${toInch(сantimeters) } дюймів <br>`)
+        document.write(`${kilograms} кілограм це буде ${toFunt(kilograms)} фунтів <br>`)
+        document.write(`${kilometers} кілометрів це буде ${toMile(kilometers)} миль <br>`)
+    </script>
+</body>
+
+</html>

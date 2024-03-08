@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№7</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>
+        Задача 7. Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються у функцію)
+    </p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        let path1 = '<img src="./blue.png" alt="Синій">'
+        let path2 = '<img src="./green.png" alt="зелений">'
+        let path3 = '<img src="./orange.png" alt="помаранчевий">'
+        let path4 = '<img src="./red.png" alt="червоний">'
+
+        randImage(path1, path2, path3, path4)
+
+        function randImage(path1, path2, path3, path4) {
+            let minNumber = 1
+            let maxNumber = 4
+            let randomNum = getRandomInt(minNumber, maxNumber)
+
+            switch (randomNum) {
+                case 1: {
+                    return document.write(path1);
+                    break
+                }
+                case 2: {
+                    return document.write(path2);
+                    break
+                }
+                case 3: {
+                    return document.write(path3);
+                    break
+                }
+                case 4: {
+                    return document.write(path4);
+                    break
+                }
+            } 
+        }
+
+        // function getRandomInt(min, max) {
+        //     min = Math.ceil(min)
+        //     max = Math.floor(max)
+        //     return Math.floor(Math.random() * (max - min + 1)) + min
+        // }
+
+        // let minNumber = 1
+        // let maxNumber = 4
+        // let randomNum = getRandomInt(minNumber, maxNumber)
+
+        // let path = ""
+        // switch (randomNum) {
+        //     case 1: {
+        //         path = '<img src="./blue.png" alt="Синій">'
+        //         break
+        //     }
+        //     case 2: {
+        //         path = '<img src="./green.png" alt="зелений">'
+        //         break
+        //     }
+        //     case 3: {
+        //         path = '<img src="./orange.png" alt="помаранчевий">'
+        //         break
+        //     }
+        //     case 4: {
+        //         path = '<img src="./red.png" alt="червоний">'
+        //         break
+        //     }
+        // }
+
+        // randImage(path)
+
+        // function randImage(path) {
+        //     return document.write(path);
+        // }
+    </script>
+</body>
+
+</html>
