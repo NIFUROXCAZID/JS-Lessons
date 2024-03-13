@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№8</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        Задача 5. Дано послідовність оцінок учня. Підрахувати кількість:
+    <ul>
+        <li>1) двійок</li>
+        <li>2) кількість хороших оцінок (добре, відмінно);</li>
+        <li>3) кількість оцінок, які нижче середнього.</li>
+    </ul>
+    </p>
+
+    <script>
+        let gradesArr = [5, 5, 5, 3, 5, 4, 4, 2, 4, 3, 5, 5, 5, 3, 5, 4, 1, 4, 3, 5]
+
+        function badGradesCounter(gradesArr) {
+            let badGrades = 0
+            for (let i = 0; i < gradesArr.length; i++) {
+                if (gradesArr[i] <= 2) {
+                    badGrades++
+                }
+            }
+            return badGrades
+        }
+
+        function goodGradesCounter(gradesArr) {
+            let goodGrades = 0
+            for (let i = 0; i < gradesArr.length; i++) {
+                if (gradesArr[i] > 4) {
+                    goodGrades++
+                }
+            }
+            return goodGrades
+        }
+
+        function littleLowGradesCounter(gradesArr) {
+            let littleLowGrades = 0
+            for (let i = 0; i < gradesArr.length; i++) {
+                if (gradesArr[i] > 2 || gradesArr[i] < 5) {
+                    littleLowGrades++
+                }
+            }
+            return littleLowGrades
+        }
+
+        document.write(`Двійки чи гірше ${badGradesCounter(gradesArr)} <br>`)
+        document.write(`Гарці оцінки ${goodGradesCounter(gradesArr)} <br>`)
+        document.write(`Середні оцінки ${littleLowGradesCounter(gradesArr)} <br>`)
+
+    </script>
+</body>
+
+</html>

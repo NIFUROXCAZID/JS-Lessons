@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№8</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 9. Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів. <br>
+        Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, <br>
+        якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. <br>
+        Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+    </p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function fieldFill(fieldSize, shipCount, battleArr) {
+            for (let i = 0; i < shipCount; i++) {
+                let randomNum = -1
+                do {
+                    randomNum = getRandomInt(minNumber, fieldSize - 1)
+                } while (battleArr[randomNum] == 1)
+                battleArr[randomNum] = 1               
+            }
+            return battleArr
+        }
+
+        function seaFight(shipCount, battleArr) {
+            let destryedShips = 0;
+            while (destryedShips !== shipCount) {
+                let shootSite = parseInt(prompt(`Введіть клітинку для пострілу від 0 до ${fieldSize - 1}: `))
+                if (battleArr[shootSite] == 1) {
+                    battleArr[shootSite] = 0
+                    destryedShips++
+                    alert(`Вітаю ви знищили корабель`)
+                } else {
+                    alert(`Ви не попали`)
+                }
+            }
+            alert(`Вітаю ви знищили всі ${destryedShips}`)
+        }
+
+        const minNumber = 0
+        let fieldSize = parseInt(prompt(`Введіть кількість клітинок: `))
+        let shipCount = parseInt(prompt(`Введіть кількість кораблів: `))
+        let battleArr = new Array(fieldSize).fill(0) //щоб одразу нулями заповнити круто, але чи можна за правилами. Ну якщо push можна то це теж метод
+
+        // let filledField = fieldFill(fieldSize, shipCount, battleArr)
+        seaFight(shipCount, fieldFill(fieldSize, shipCount, battleArr)) // О я не знав що так можна
+        // Ну от чисто функціональне програмування
+    </script>
+
+</body>
+
+</html>

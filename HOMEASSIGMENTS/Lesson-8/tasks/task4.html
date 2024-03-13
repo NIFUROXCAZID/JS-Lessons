@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№8</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 6. Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити користувач <br>
+        (кількість грошей задається). <br>
+        Приклад збереження даних <br>
+        let productsPrices = [1000, 20, 31] <br>
+        let productsTitles = [‘cheese’, ‘juice’, ‘bread’]
+    </p>
+
+    <script>
+        let productsPrices = [144, 20, 31, 228, 245, 70, 188, 120, 18, 112]
+        let productsTitles = [`cheese`, `juice`, `bread`, `susi-baka`, `bts-meal`, `choco-tubik`, `mac-menu`, `happy-meal`, `eghteen-diabetes`, `naggets-pack`]
+        let userMoney = parseInt(prompt(`Введіть вашу кількість грошей: `))
+
+        function showAvaliable (productsPrices, productsTitles) {
+            let result = ``
+            for (let i = 0; i < productsPrices.length; i++) {
+                if (userMoney >= productsPrices[i]) {
+                    result += `Вам доступно ${productsTitles[i]} за ${productsPrices[i]} <br>`
+                }
+            } 
+            return result
+        }
+
+        document.write(showAvaliable(productsPrices, productsTitles))
+
+    </script>
+</body>
+
+</html>

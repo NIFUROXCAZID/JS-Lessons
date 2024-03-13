@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№8</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+    <ul>
+        <li>1) за весь рік;</li>
+        <li>2) у першій половині року;</li>
+        <li>3) у другій половині року;</li>
+        <li>4) за літо;</li>
+        <li>5) за ІІ квартал;</li>
+        <li>6) за парні місяці (з парними номерами);</li>
+        <li>7) за місяці, які є початковими у сезоні (весна, літо, осінь, зима).</li>
+    </ul>
+    </p>
+
+    <script>
+
+        let billArrJanuary = [144, 228, 16, 46]
+        let billArrFebruary = [11, 23, 24]
+        let billArrMarch = [200, 340]
+        let billArrApril = [34, 33, 55]
+        let billArrMay = [13, 16, 27, 44, 99]
+        let billArrJune = [28, 23, 45, 66]
+        let billArrJuly = [29, 23, 24]
+        let billArrAugust = [5]
+        let billArrSeptember = [17, 77, 88, 47]
+        let billArrOctober = [20, 30, 39, 45]
+        let billArrNovember = [12, 27, 50]
+        let billArrDecember = [11, 87, 84, 34]
+
+        let billsForYear = [billArrJanuary, billArrFebruary, billArrMarch, billArrApril, billArrMay, billArrJune,
+            billArrJuly, billArrAugust, billArrSeptember, billArrOctober, billArrNovember, billArrDecember]
+
+        function sumForYear(billsForYear) {
+            let forYear = 0
+            for (let i = 0; i < billsForYear.length; i++) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    forYear += billsForYear[i][j]
+                }
+            }
+            return forYear
+        }
+
+        function sumFirstHalfYear(billsForYear) {
+            let firstHalfYear = 0
+            for (let i = 0; i < billsForYear.length / 2; i++) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    firstHalfYear += billsForYear[i][j]
+                }
+            }
+            return firstHalfYear
+        }
+
+        function sumSecondHalfYear(billsForYear) {
+            let secondHalfYear = 0
+            for (let i = 5; i < billsForYear.length; i++) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    secondHalfYear += billsForYear[i][j]
+                }
+            }
+            return secondHalfYear
+        }
+
+        function sumForSummer(billsForYear) {
+            let forSummer = 0
+            for (let i = 5; i < billsForYear.length - 4; i++) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    forSummer += billsForYear[i][j]
+                }
+            }
+            return forSummer
+        }
+
+        function sumForSecondQuartal(billsForYear) {
+            let forSecondQuartal = 0
+            for (let i = 3; i < billsForYear.length - 6; i++) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    forSecondQuartal += billsForYear[i][j]
+                }
+            }
+            return forSecondQuartal
+        }
+
+        function sumForPairMonth(billsForYear) {
+            let forPairMonth = 0
+            for (let i = 1; i < billsForYear.length; i += 2) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    forPairMonth += billsForYear[i][j]
+                }
+            }
+            return forPairMonth
+        }
+
+        function sumForFirstSeasonMonth(billsForYear) {
+            let forFirstSeasonMonth = 0
+            for (let i = 2; i < billsForYear.length; i += 3) {
+                for (let j = 0; j < billsForYear[i].length; j++) {
+                    forFirstSeasonMonth += billsForYear[i][j]
+                }
+            }
+            return forFirstSeasonMonth
+        }
+
+        document.write(`за весь рік: ${sumForYear(billsForYear)} <br>`)
+        document.write(`за першу половину року: ${sumFirstHalfYear(billsForYear)} <br>`)
+        document.write(`за другу половину року: ${sumSecondHalfYear(billsForYear)} <br>`)
+        document.write(`за літо: ${sumForSummer(billsForYear)} <br>`)
+        document.write(`за || квартал: ${sumForSecondQuartal(billsForYear)} <br>`)
+        document.write(`за парні місяці (з парними номерами): ${sumForPairMonth(billsForYear)} <br>`)
+        document.write(`за місяці, які є початковими у сезоні (весна, літо, осінь, зима): ${sumForFirstSeasonMonth(billsForYear)} <br>`)
+
+    </script>
+</body>
+
+</html>

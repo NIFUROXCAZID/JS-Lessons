@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№8</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 8. Дано одновимірний масив, у якому зберігається певна виграшна сума <br>
+        (елементи заповнюються випадковим чином значеннями від -500 до 500). <br>
+        Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити сумарний виграш.
+    </p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function casinoPucan(casinoArr) {
+            let stopPlay = false
+            let winPrize = 0
+
+            for (let i = 0; i < casinoArr.length; i++) {
+                casinoArr[i] = getRandomInt(minNumber, maxNumber)
+            }
+            while (stopPlay == false) {
+                let takeMoney = parseInt(prompt(`вкажіть комірку масиву, звідки забиратимемо грощі від 0 до ${fieldSize - 1}: `))
+                winPrize += casinoArr[takeMoney]
+                casinoArr[takeMoney] = 0
+                stopPlay = confirm(`Хочете зупинитись на цьому й вивести виграш??? Ваш виграш на даний момент: ${winPrize}`);
+            }
+            if (stopPlay == true) {
+                blockUser(winPrize)
+            }
+        }
+
+        function blockUser(winPrize) {
+            winPrize = 0;
+            alert(`ඞВАШ РАХУНОК БУЛО ЗАБЛОКОВАНО, ДЛЯ РОЗБЛОКУВАННЯ БУДЬ-ЛАСКА ВВЕДІТЬ 3 ЦИФРИ З ЗВОРОТНОЇ СТОРОНИ КАРТКИ ЯКУ ВИ ПРИВЬЯЗУВАЛИ ДО ГАМАНЦЮ САЙТУඞ`)
+            let scum = parseInt(prompt(`Три цифри з зворотньої сторони картки: `))
+            alert(`ඞඞඞСталася помилкаඞඞඞ`)
+        }
+
+        const minNumber = -500
+        const maxNumber = 500
+        let fieldSize = parseInt(prompt(`Введіть ширину масиву: `))
+        let casinoArr = new Array(fieldSize).fill(0)
+
+        casinoPucan(casinoArr)
+
+
+
+
+        // function getRandomInt(min, max) {
+        //     min = Math.ceil(min)
+        //     max = Math.floor(max)
+        //     return Math.floor(Math.random() * (max - min + 1)) + min
+        // }
+
+        // const minNumber = -100
+        // const maxNumber = 500
+        // let fieldSize = parseInt(prompt(`Введіть ширину масиву: `))
+        // let casinoArr = new Array(fieldSize).fill(0)
+        // let stopPlay = false
+        // let winPrize = 0
+
+        // for (let i = 0; i < casinoArr.length; i++) {
+        //     casinoArr[i] = getRandomInt(minNumber, maxNumber)
+        // }
+        // while (stopPlay == false) {
+        //     let takeMoney = parseInt(prompt(`вкажіть комірку масиву, звідки забиратимемо грощі від 0 до ${fieldSize - 1}: `))
+        //     winPrize += casinoArr[takeMoney]
+        //     casinoArr[takeMoney] = 0
+        //     stopPlay = confirm(`Хочете зупинитись на цьому й вивести виграш??? Ваш виграш на даний момент: ${winPrize}`);
+        // }
+
+        // if (stopPlay == true) {
+        //     blockUser(winPrize)
+        // }
+
+        // function blockUser(winPrize) {
+        //     winPrize = 0;
+        //     alert(`ඞВАШ РАХУНОК БУЛО ЗАБЛОКОВАНО, ДЛЯ РОЗБЛОКУВАННЯ БУДЬ-ЛАСКА ВВЕДІТЬ 3 ЦИФРИ З ЗВОРОТНОЇ СТОРОНИ КАРТКИ ЯКУ ВИ ПРИВЬЯЗУВАЛИ ДО ГАМАНЦЮ САЙТУඞ`)
+        //     let scum = parseInt(prompt(`Три цифри з зворотньої сторони картки: `))
+        //     alert(`Сталася помилка`)
+        // }
+    </script>
+</body>
+
+</html>
