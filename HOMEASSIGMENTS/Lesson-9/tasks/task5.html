@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        5.Дано масив елементів. Знайти добуток додатних елементів
+    </p>
+
+    <script>
+        let testArr = [11, 14, "amogus", "28", 88, 22, 10, "ඞ", 9, 0, -100, ["susi", "baka"], 25]
+        let sumPositive = 1
+        for (let element of testArr) {
+            if (element > 0) sumPositive *= element
+        }
+        document.write(sumPositive)
+    </script>
+</body>
+
+</html>

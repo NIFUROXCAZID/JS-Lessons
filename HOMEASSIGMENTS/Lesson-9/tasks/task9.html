@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 9</h1>
+    <p>
+        9. Дано масив імен. Сформувати масив з перших літер цих імен.
+    </p>
+
+    <script>
+        let testArr = ["Амосов", "Маверик", "Огато", "Герасімов", "Успенков", "Сирський",]
+        const startSymbol = "A"
+
+        document.write(`Початковий масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+        document.write(`<br>`)
+
+        let newArr = testArr.map((value, index, array) => { return value[0] })
+        // let newArr = testArr.map(value => value[0])
+
+        document.write(`Оброблений масив: `)
+        for (let element of newArr) {
+            document.write(`${element} `)
+        }
+    </script>
+</body>
+
+</html>

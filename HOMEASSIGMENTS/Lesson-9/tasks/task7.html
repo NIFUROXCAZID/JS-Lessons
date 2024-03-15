@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>
+        7.Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.
+    </p>
+
+    <script>
+        let testArr = [100, 200, 1400, 1000, 1100, 2500, 700, 2000, 10000, 800, 150, 550]
+        const discountZone = 1000
+        const discountPercent = 0.7
+        document.write(`Початковий масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+        document.write(`<br>`)
+
+        testArr.forEach((value, index, array) => {
+            if (value > discountZone) array[index] = Math.round(array[index] * discountPercent)
+        })
+
+        document.write(`Оброблений масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+    </script>
+</body>
+
+</html>

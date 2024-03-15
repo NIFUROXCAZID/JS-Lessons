@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        6.Дано масив елементів. Усі елементи, які більші за перший елемент помножити на 2
+    </p>
+
+    <script>
+        let testArr = [11, 16, "amogus", "28", 88, 22, 10, "ඞ", 9, 0, -100, ["susi", "baka"], 25]
+        // let testArr = [11, 14, 88, 22, 10, 9, 0, -100, 25]
+        document.write(`Початковий масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+        document.write(`<br>`)
+
+        testArr.forEach((value, index, array) => {
+            // if (array[index] > array[0]) array[index] *= 2
+            if (value > array[0]) array[index] *= 2
+        })
+
+        document.write(`Оброблений масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+    </script>
+</body>
+
+</html>

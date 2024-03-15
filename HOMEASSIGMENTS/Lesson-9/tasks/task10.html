@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 10</h1>
+    <p>
+        10. Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у грн.
+    </p>
+
+    <script>
+        let testArr = [100, 200, 1400, 1000, 1100, 2500, 700, 2000, 10000, 800, 150, 550]
+        const taxPersent = 0.2
+
+        document.write(`Початковий масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+        document.write(`<br>`)
+
+        let newArr = testArr.map(value => value * taxPersent)
+
+        document.write(`Оброблений масив: `)
+        for (let element of newArr) {
+            document.write(`${element} `)
+        }
+    </script>
+
+</body>
+
+</html>

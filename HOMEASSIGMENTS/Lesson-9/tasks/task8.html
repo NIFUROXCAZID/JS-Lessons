@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№9</title>
+</head>
+
+<body>
+    <h1>Задача 8</h1>
+    <p>
+        8. Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»
+    </p>
+
+    <script>
+        // ее а як влаштовані номерні знаки, я не грамотний.
+        let testArr = ["BI-2988", "AB-1324", "MM-4532", "AV-4556", "GA-2343", "AA-4453", "BN-8654", "HJ-2448", "AD-2568", "IO-4543",]
+        const startSymbol = "A"
+
+        document.write(`Початковий масив: `)
+        for (let element of testArr) {
+            document.write(`${element} `)
+        }
+        document.write(`<br>`)
+
+        // Ага ну краще filter напевно
+        // let newArr = testArr.map((value, index, array) => {
+        //     // if (value[0] == "A") return value
+        //     if (value.startsWith('A')) return value
+        // })
+
+        let newArr = testArr.filter((val) => {
+            if (val.startsWith('A')) return val
+        })
+
+        document.write(`Оброблений масив: `)
+        for (let element of newArr) {
+            document.write(`${element} `)
+        }
+    </script>
+</body>
+
+</html>
