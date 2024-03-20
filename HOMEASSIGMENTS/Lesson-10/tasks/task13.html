@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№10</title>
+</head>
+
+<body>
+    <h1>Задача 13</h1>
+    <p>
+        13)Знайти індекс останньої ціни, що більше за 1000
+    </p>
+
+    <script>
+        // Задання початкової умови
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        const papersCount = 100
+        const minPrice = 1
+        const maxPrice = 10000
+        let paperPriceHistory = new Array(papersCount).fill(0)
+
+        paperPriceHistory = paperPriceHistory.map(() => getRandomInt(minPrice, maxPrice))
+
+        document.write("Початковий масив: ")
+        for (let element of paperPriceHistory) document.write(`${element} `)
+
+        // Розвьязання задачі
+        let filteredPriceHistory = paperPriceHistory.findLastIndex(value => value > 1000)
+
+        document.write("<br> <br> Результат: ")
+        document.write(`Останній індекс елемента більшого за 1000: ${filteredPriceHistory}<br>`)
+    </script>
+</body>
+
+</html>
