@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№11</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+    </p>
+
+    <script>
+        const min = 0
+        const max = 5
+        let shels = 0
+        let shipCount = 5
+        let destroyedShips = 0
+        let battleField = new Array(6).fill(0).map(() => new Array(6).fill(0));
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        for (let i = 0; i < shipCount; i++) {
+            let x = -1
+            let y = -1
+            do {
+                x = getRandomInt(min, max)
+                y = getRandomInt(min, max)
+            } while (battleField[x][y] == 1)
+            battleField[x][y] = 1
+        }
+
+        shels = parseInt(prompt(`Введіть кількість снарядів: `))
+
+        while (shels !== 0) {
+            let userX = parseInt(prompt(`Введіть координату X прицілу: `))
+            let userY = parseInt(prompt(`Введіть координату Y прицілу: `))
+            alert("ВОГОНЬ")
+            if (battleField[userX][userY] == 1) {
+                destroyedShips++
+                battleField[userX][userY] = 0
+                alert("Ви вразили ціль")
+            } else {
+                alert("Промах")
+            }
+            shels--
+            if (destroyedShips == shipCount) {
+                alert("Ви вийграли, всі цілі уражено")
+                break
+            }
+        }
+        if (destroyedShips !== shipCount) {
+            alert("Ви пройграли, снаряди закінсились")
+        }
+        // Треба піти в синтаксисі typeScript поробити додаткові завдання з минулих домашок
+    </script>
+</body>
+
+</html>

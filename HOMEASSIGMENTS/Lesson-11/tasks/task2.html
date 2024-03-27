@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№11</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти : <br>
+        1) загальний прибуток кожного масиву за тиждень; <br>
+        2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.); <br>
+        3) загальний прибуток за робочі дні <br>
+        4) загальний прибуток за вихідні дні <br>
+        5) максимальний прибуток за середу <br>
+        6) сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200 <br>
+        7) відсортувати кожен тиждень за зростанням <br>
+        8) відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків <br>
+        9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше). <br>
+    </p>
+
+    <script>
+        let profitArr = [
+            [10, 20, 30, 160, 170, 180, 190],
+            [40, 50, 60, 210, 200, 230, 220],
+            [70, 80, 90, 240, 230, 250, 260],
+            [100, 110, 120, 270, 290, 280, 300],
+            [130, 140, 150, 340, 330, 320, 310]
+        ]
+        // --------------------------------------------------------
+        let resultOne = profitArr.reduce((previousValue, currentValue, currentIndex, array) => {
+            const rowSum = currentValue.reduce((rowPreviousValue, rowCurrentValue, rowCurrentIndex, rowBaseArr) => {
+                return rowPreviousValue + rowCurrentValue
+            }, 0)
+            previousValue.push(rowSum)
+            return previousValue
+        }, [])
+
+        document.write(`1) загальний прибуток кожного масиву за тиждень: `)
+        for (let element of resultOne) document.write(`${element}, &nbsp; `)
+        document.write(`<br>`)
+        // --------------------------------------------------------
+        // циклом булоб проще але не цікаво, треба reduce глибше усвідомити
+        let resultTwo = profitArr[0].reduce((previousValue, _, currentIndex) => {
+            const colSum = profitArr.reduce((colPreviousValue, rowSubArray) => {
+                return colPreviousValue + rowSubArray[currentIndex]
+            }, 0)
+            previousValue.push(colSum)
+            return previousValue
+        }, [])
+        // блін як це складно для розуміння краще б цикл зробив, там парочку foreach і не страждав б
+        document.write(`2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.): `)
+        for (let element of resultTwo) document.write(`${element}, &nbsp; `)
+        document.write(`<br>`)
+        // --------------------------------------------------------
+        let resultTree = profitArr.reduce((previousValue, currentValue, currentIndex, array) => {
+            const rowSum = currentValue.reduce((rowPreviousValue, rowCurrentValue, rowCurrentIndex, rowBaseArr) => {
+                if (rowCurrentIndex < 5) return rowPreviousValue + rowCurrentValue
+                return rowPreviousValue
+            }, 0)
+            return previousValue + rowSum
+        }, 0)
+
+        document.write(`3) загальний прибуток за робочі дні: ${resultTree} <br>`)
+        // --------------------------------------------------------
+        let resultFour = profitArr.reduce((previousValue, currentValue, currentIndex, array) => {
+            const rowSum = currentValue.reduce((rowPreviousValue, rowCurrentValue, rowCurrentIndex, rowBaseArr) => {
+                if (rowCurrentIndex > 4) return rowPreviousValue + rowCurrentValue
+                return rowPreviousValue
+            }, 0)
+            return previousValue + rowSum
+        }, 0)
+
+        document.write(`4) загальний прибуток за вихідні дні: ${resultFour} <br>`)
+        // --------------------------------------------------------
+        let arrWednesday = profitArr.reduce((previousValue, currentValue, currentIndex, array) => {
+            const rowSum = currentValue.reduce((rowPreviousValue, rowCurrentValue, rowCurrentIndex, rowBaseArr) => {
+                if (rowCurrentIndex === 2) return rowCurrentValue
+                return rowPreviousValue
+            }, 0)
+            previousValue.push(rowSum)
+            return previousValue
+        }, [])
+        let resultFive = Math.max(...arrWednesday);
+        document.write(`5) максимальний прибуток за середу: ${resultFive} <br>`)
+        // хоча можна й ще краще
+        // let arrWednesday = array.reduce((max, currentRow) => {
+        //     return Math.max(max, currentRow[2])
+        // }, Number.NEGATIVE_INFINITY)
+        // --------------------------------------------------------
+        let resultSix = profitArr.reduce((previousValue, currentValue) => {
+            currentValue.forEach(value => {
+                if (value > 200) {
+                    previousValue.push(value)
+                }
+            })
+            return previousValue
+        }, [])
+
+        document.write(`6) сформувати загальний список (одновимірний масив) зі значеннями, які більше за двісті: `)
+        for (let element of resultSix) document.write(`${element}, &nbsp; `)
+        document.write(`<br>`)
+        // --------------------------------------------------------
+        profitArr.forEach((value, index, array) => {
+            value.sort((el1, el2) => el1 - el2)
+        })
+        document.write(`<br>`)
+        document.write(`7) відсортувати кожен тиждень за зростанням: <br>`)
+        for (let element of profitArr) {
+            for (let element2 of element) {
+                document.write(`${element2}, &nbsp; `)
+            }
+            document.write(`<br>`)
+        }
+        // --------------------------------------------------------
+        profitArr.sort((a, b) => {
+            const maxA = Math.max(...a)
+            const maxB = Math.max(...b)
+            return maxB - maxA
+        })
+        document.write(`<br>`)
+        document.write(`8) відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків: <br>`)
+        for (let element of profitArr) {
+            for (let element2 of element) {
+                document.write(`${element2}, &nbsp; `)
+            }
+            document.write(`<br>`)
+        }
+        // --------------------------------------------------------
+        profitArr.sort((a, b) => {
+            const maxA = a.reduce((previousValue, currentValue) => { previousValue + currentValue }, 0)
+            const maxB = b.reduce((previousValue, currentValue) => { previousValue + currentValue }, 0)
+            return maxB - maxA
+        })
+        document.write(`<br>`)
+        document.write(`9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше): <br>`)
+        for (let element of profitArr) {
+            for (let element2 of element) {
+                document.write(`${element2}, &nbsp; `)
+            }
+            document.write(`<br>`)
+        }
+    </script>
+</body>
+
+</html>
