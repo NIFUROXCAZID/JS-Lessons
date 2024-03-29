@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№12</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 4. Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком . <br>
+        Тобто кожного разу після обміну елементів вивести поточний стан масиву на екран (стрілки не потрібні).
+    </p>
+
+    <script>
+        // напевно треба спочатку бінарний пошук розглянути
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function swap(arr, index1, index2) {
+            let temp = arr[index1]
+            arr[index1] = arr[index2]
+            arr[index2] = temp
+        }
+
+        function showStage(arr) {
+            document.write(`[ `)
+            for (const element of arr) {
+                document.write(` ${element}, &nbsp; `)
+            }
+            document.write(` ] <br>`)
+        }
+
+        let min = -100
+        let max = 100
+        let testArr = new Array(30)
+
+        // for (let i = 0; i < testArr.length; i++) {
+        //     testArr[i] = getRandomInt(min, max);
+        // }
+
+        // Бульбашкове сортування
+        // for (let i = 0; i < testArr.length; i++) {
+        //     testArr[i] = getRandomInt(min, max);
+        // }
+        testArr = [3, 5, 1, 4, 2]
+
+        let swaped
+        do {
+            swaped = false
+            for (let i = 1; i < testArr.length; i++) {
+                if (testArr[i - 1] > testArr[i]) {
+                    swap(testArr, i, i - 1)
+                    swaped = true
+                }
+                showStage(testArr)
+            }
+        } while (swaped)
+        document.write(`<br><br> Коктельне сортування<br>`)
+        // -----------------------------------------
+        // Cock сортування
+        // for (let i = 0; i < testArr.length; i++) {
+        //     testArr[i] = getRandomInt(min, max);
+        // }
+        testArr = [3, 5, 1, 4, 2]
+
+        let leftIndex = 0
+        let rightIndex = testArr.length - 1
+
+        while (leftIndex < rightIndex) {
+            for (let i = leftIndex; i < rightIndex; i++) {
+                if (testArr[i] > testArr[i + 1]) {
+                    swap(testArr, i, i + 1)
+                    showStage(testArr)
+                }
+            }
+            rightIndex--
+            for (let i = rightIndex; i > leftIndex; i--) {
+                if (testArr[i] < testArr[i - 1]) {
+                    swap(testArr, i, i - 1)
+                    showStage(testArr)
+                }
+            }
+            leftIndex++
+        }
+        document.write(`<br><br> Сортування включенням<br>`)
+        // -----------------------------------------
+        // Сортування включенням
+        // for (let i = 0; i < testArr.length; i++) {
+        //     testArr[i] = getRandomInt(min, max);
+        // }
+        testArr = [3, 5, 1, 4, 2]
+
+        for (let k = 1; k < testArr.length; k++) {
+            const currentElement = testArr[k]
+            let i = k - 1
+            while (i >= 0 && testArr[i] > currentElement) {
+                testArr[i + 1] = testArr[i]
+                i = i - 1
+                showStage(testArr)
+            }
+            testArr[i + 1] = currentElement
+            showStage(testArr)
+        }
+        // -----------------------------------------
+    </script>
+
+</body>
+
+</html>

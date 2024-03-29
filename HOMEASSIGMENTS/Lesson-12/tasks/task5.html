@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№12</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        Задача 5. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+    </p>
+
+    <script>
+        function swap(arr, index1, index2) {
+            let temp = arr[index1]
+            arr[index1] = arr[index2]
+            arr[index2] = temp
+        }
+
+        let testArr = ["Flinn", "Maverick", "Alexcandr", "Roui", "Amogus", "Olga", "Nicocado", "Tyler", "Richard", "Biden", "Conor", "Zik", "Bradley", "Stouner", "Colt", "Geremy", "Hugo", "Jack", "Kitler", "Lao", "Monika", "Igger"]
+
+        document.write(`Початковий масив: <br>`)
+        for (const iterator of testArr) {
+            document.write(`${iterator}, &nbsp; `)
+        }
+        document.write(`<br><br>`)
+
+        let swaped
+        do {
+            swaped = false
+            for (let i = 1; i < testArr.length; i++) {
+                if (testArr[i - 1] > testArr[i]) {
+                    swap(testArr, i, i - 1)
+                    swaped = true
+                }
+            }
+        } while (swaped)
+
+        document.write(`Відсортований масив: <br>`)
+        for (const iterator of testArr) {
+            document.write(`${iterator}, &nbsp; `)
+        }
+        document.write(`<br><br>`)
+
+        let start = 0
+        let end = testArr.length - 1
+        let search = "Olga"
+        let finded = -1
+
+        while (start <= end) {
+            const middle = Math.floor((start + end) / 2)
+            if (testArr[middle] === search) {
+                finded = middle
+                break
+            }
+            if (testArr[middle] < search) start = middle + 1
+            if (testArr[middle] > search) end = middle - 1
+        }
+
+        if (finded != -1) {
+            document.write(`Імья ${search}, є у масиві і знаходиться під індексом ${finded} <br>`)
+        } else {
+            document.write(`Імья ${search}, у масиві немає <br>`)
+        }
+
+    </script>
+</body>
+
+</html>

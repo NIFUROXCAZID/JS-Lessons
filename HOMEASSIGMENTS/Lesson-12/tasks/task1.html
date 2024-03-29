@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№12</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування бульбашкою
+    </p>
+
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function swap(arr, index1, index2) {
+            let temp = arr[index1]
+            arr[index1] = arr[index2]
+            arr[index2] = temp
+        }
+
+
+        let min = -100
+        let max = 100
+        let changes = 0
+        let compares = 0
+        let iterations = 0
+        let testArr = new Array(30)
+
+        for (let i = 0; i < testArr.length; i++) {
+            testArr[i] = getRandomInt(min, max);
+        }
+
+        document.write(`Початковий масив: <br>`)
+        for (const iterator of testArr) {
+            document.write(`${iterator}, &nbsp; `)
+        }
+        document.write(`<br><br>`)
+
+        // Пішов алгоритм пишу по памьяті честно
+        let swaped
+        do {
+            iterations++
+            swaped = false
+            for (let i = 1; i < testArr.length; i++) {
+                compares++
+                if (testArr[i - 1] > testArr[i]) {
+                    changes++
+                    swap(testArr, i, i - 1)
+                    swaped = true
+                }
+            }
+        } while (swaped)
+        // -----------------------------------------
+
+        document.write(`Кількість ітерацій: ${iterations} <br>`)
+        document.write(`Кількість порівнянь: ${compares} <br>`)
+        document.write(`Кількість змін: ${changes} <br><br>`)
+        document.write(`Відсортований масив: <br>`)
+        for (const iterator of testArr) {
+            document.write(`${iterator}, &nbsp; `)
+        }
+        document.write(`<br>`)
+    </script>
+
+</body>
+
+</html>
