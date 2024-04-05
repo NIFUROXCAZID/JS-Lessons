@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№14</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Описати масив об’єктів – сайтів розроблених компанією з такими властивостями <br>
+        ----- Властивості ------<br>
+        - назва компанії та час розробки (назву періодично змінюють)<br>
+        - власник компанії<br>
+        - споснсори (масив спонсорів)<br>
+        * прізвище спонсора<br>
+        * ім’я спонсора<br>
+        * сума вкладень спонсора<br>
+        - рік випуску<br>
+        - вартість сайту<br>
+        Знайти:<br>
+        1) загальну вартість усіх сайтів<br>
+        2) кількість сайтів, що було зроблено між 2000 та 2009 рр.<br>
+        3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000<br>
+        4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)<br>
+        5) знайти рік, коли прибуток був найбільшим<br>
+        6) упорядкувати список за спаданням прибутку<br>
+        7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000<br>
+    </p>
+
+    <script>
+        let developedSites = [{
+            companyTitle: "Car Sale",
+            developTime: 121488228,
+            companyOwner: "Amogus",
+            sponsors: [
+                {
+                    spName: 'Juniver',
+                    spSername: 'Maverick',
+                    spSumHoldings: 1500,
+                },
+                {
+                    spName: 'Bo',
+                    spSername: 'Meruem',
+                    spSumHoldings: 2000,
+                },
+                {
+                    spName: 'Flinn',
+                    spSername: 'Simonow',
+                    spSumHoldings: 1000,
+                }],
+            releaseYear: 2007,
+            sitePrice: 5500
+        },
+        {
+            companyTitle: "Station-13",
+            developTime: 202456788,
+            companyOwner: "Susi-baka",
+            sponsors: [
+                {
+                    spName: 'Patrick',
+                    spSername: 'Roller',
+                    spSumHoldings: 1500,
+                },
+                {
+                    spName: 'Bruh',
+                    spSername: 'Snow',
+                    spSumHoldings: 1500,
+                },
+                {
+                    spName: 'Josh',
+                    spSername: 'Xcina',
+                    spSumHoldings: 3000,
+                }],
+            releaseYear: 2024,
+            sitePrice: 20000
+        },
+        {
+            companyTitle: "Rotten cocumber",
+            developTime: 13675345,
+            companyOwner: "Termina",
+            sponsors: [
+                {
+                    spName: 'Levi',
+                    spSername: 'Heroinov',
+                    spSumHoldings: 50000,
+                },
+                {
+                    spName: 'Marina',
+                    spSername: 'Transfer',
+                    spSumHoldings: 70000,
+                },
+                {
+                    spName: 'Osaa',
+                    spSername: 'Whisker',
+                    spSumHoldings: 10000,
+                }],
+            releaseYear: 2018,
+            sitePrice: 2500
+        },
+        ]
+        // --------------------------------------------
+        let generalPrice = developedSites.reduce((previousValue, currentValue, currentIndex, array) => {
+            return previousValue += currentValue.sitePrice
+        }, 0)
+        document.write(`<br><br>`)
+        document.write(`1) Загальна вартість сайтів: ${generalPrice}<br>`)
+        // --------------------------------------------
+        let twoThousandthsSites = 0
+        for (const element of developedSites) {
+            if (element.releaseYear > 2000 && element.releaseYear < 2009) twoThousandthsSites++
+        }
+        document.write(`2) Кількість сайтів що зроблено між 2000 і 2009: ${twoThousandthsSites}<br>`)
+        // --------------------------------------------
+        let sponsorSumCount = 0
+        let sponsorsSum = 0
+        for (const element of developedSites) {
+            sponsorsSum = element.sponsors.reduce((previousValue, currentValue, currentIndex, array) => {
+                return previousValue += currentValue.spSumHoldings
+            }, 0)
+            if (sponsorsSum > 100000) sponsorSumCount++
+        }
+        document.write(`3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000: ${sponsorSumCount}<br>`)
+        // --------------------------------------------
+        let sponsorsArr = []
+        let sponsorsObject
+        for (const element of developedSites) {
+            sponsorsArr = [...sponsorsArr, ...element.sponsors.map((value) => ({ firstName: value.spName, lastName: value.spSername }))]
+            // додаєм минулий масив sponsorsArr і результат map у sponsorsArr
+            // const sponsorObjects = element.sponsors.map(sponsor => ({ firstName: sponsor.spName, lastName: sponsor.spSername }))
+            // sponsorsArr.push(...sponsorObjects)
+            // const sponsorObjects = element.sponsors.map(sponsor => ({ firstName: sponsor.spName, lastName: sponsor.spSername }))
+            // sponsorsArr = sponsorsArr.concat(sponsorObjects)
+            // for (const element2 of element.sponsors) {
+            //     sponsorsArr.push(element2.spName)
+            // }
+            // Ну прям всіми способами.
+        }
+        document.write(`4) Список спонсорів: `)
+        for (const element of sponsorsArr) {
+            // document.write(`${element}, `)
+            document.write(`${element.firstName} `)
+            document.write(`${element.lastName}, `)
+        }
+        document.write(`<br>`)
+        // --------------------------------------------
+        let profitestYear = 0
+        let maxPrice = 0
+        developedSites.forEach(element => {
+            if (element.sitePrice > maxPrice) {
+                maxPrice = element.sitePrice
+                profitestYear = element.releaseYear
+            }
+        })
+        // Супер банально але зрозуміло
+        document.write(`5) Рік коли прибуток був найбільшим: ${profitestYear}<br>`)
+        // --------------------------------------------
+        document.write(`6) Початковий список прибутків: `)
+        for (const element of developedSites) {
+            document.write(`${element.sitePrice}, `)
+        }
+        document.write(`<br>`)
+
+        developedSites.sort((a, b) => {
+            return b.sitePrice - a.sitePrice
+        })
+
+        document.write(`Відcортований список прибутків: `)
+        for (const element of developedSites) {
+            document.write(`${element.sitePrice}, `)
+        }
+        document.write(`<br>`)
+        // --------------------------------------------
+        let less10000 = []
+        let more10000 = []
+        developedSites.forEach(element => {
+            let copyOfElement = JSON.parse(JSON.stringify(element))
+            if (element.sitePrice < 10000) {
+                less10000.push(copyOfElement)
+            } else {
+                more10000.push(copyOfElement)
+            }
+        })
+        document.write(`7) Ціни копій сайтів менших за 10к: `)
+        for (const element of less10000) {
+            document.write(` ${element.sitePrice}, `)
+        }
+        document.write(`<br>`)
+        document.write(`Ціни копій сайтів більших за 10к: `)
+        for (const element of more10000) {
+            document.write(` ${element.sitePrice}, `)
+        }
+    </script>
+
+</body>
+
+</html>

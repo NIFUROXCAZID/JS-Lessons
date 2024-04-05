@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№14</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців. <br>
+    </p>
+
+    <script>
+        let dateObj = {
+            day: 20,
+            month: 6,
+            year: 2000
+        }
+
+        let monthN = 239
+
+        // function timeSkip(obj, month) {
+        //     let currentYear = obj.year
+        //     let skipedYears = Math.floor(month / 12)
+        //     return currentYear + skipedYears
+        // }
+        // А ой напевно хочуть деструктуризацію от
+
+        function timeSkip({ year }, month) {
+            let currentYear = year
+            let skipedYears = Math.floor(month / 12)
+            return currentYear + skipedYears
+        }
+
+        document.write(`Зараз у обєкті ${dateObj.year} рік <br>`)
+        document.write(`А через ${monthN} місяців буде ${timeSkip(dateObj, monthN)} рік <br>`)
+        document.write(`Ну начебто так. <br>`)
+    </script>
+</body>
+
+</html>

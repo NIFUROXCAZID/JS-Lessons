@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№13</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>
+        Задача 7. Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться перевірка.
+    </p>
+
+    <script>
+        function getRandomInt(min = 1, max = 100) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+        let count = 1
+
+        function summTraining() {
+            let summsID = setTimeout(askQuestion, 1000 * 10);
+
+            function askQuestion() {
+                let sumA = getRandomInt()
+                let sumB = getRandomInt()
+                let result = prompt(`Скільки буде ${sumA} + ${sumB}`)
+                if (result == sumA + sumB) {
+                    document.write(`Приклад №${count}: ВІРНО! <br>`);
+                } else {
+                    document.write(`Приклад №${count}: НЕ ВІРНО! <br>`);
+                }
+                count++
+                
+                summsID = setTimeout(askQuestion, 1000 * 10)
+            }
+        }
+
+        summTraining();
+    </script>
+</body>
+
+</html>
