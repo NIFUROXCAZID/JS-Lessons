@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№15</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 1. Створити об’єкт «Тир».
+        У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.<br>
+        Поля(властивості) Масив, у якому зберігається поле з зайцями<br>
+        Методи (дії) Метод пострілу (задається позиція пострілу)<br>
+        Виведення ігрового поля<br>
+    </p>
+
+    <script>
+        let shootingRange = {
+            huntField: [[0, 1, 0], [0, 0, 0], [0, 0, 1]],
+            shootBunny: function (x, y) {
+                if (this.huntField[x][y] == 1) {
+                    this.huntField[x][y] = 0
+                    alert('Ви влучили')
+                } else {
+                    alert('Ви Промахнулись')
+                }
+            },
+            showField: function () {
+                this.huntField.forEach(row => {
+                    row.forEach((column) => {
+                        document.write(column)
+                    })
+                    document.write(`<br>`)
+                });
+            },
+        }
+
+        let stop = false
+        while(!stop) {
+            let posX = prompt("Введіть X-координату для пострілу від 0 до 2:")
+            let posY = prompt("Введіть Y-координату для пострілу від 0 до 2:")
+            shootingRange.shootBunny(posX, posY)
+            stop = confirm("Зупинити гру і вивести поле?");
+        }
+        shootingRange.showField()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№15</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 3. Розробити клас MultChecker для перевірки таблиці множення<br>
+        Поля Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7) Кількість правильних відповідей Кількість неправильних відповідей<br>
+        Методи Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване) Перевірка правильності вказаної відповіді render - виведення інформації про тестування на екран<br>
+    </p>
+
+    <script>
+        function getRandomInt(min = 1, max = 100) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        class MultChecker {
+            constructor(number, correct, incorrect) {
+                this.number = number
+                this.correct = correct
+                this.incorrect = incorrect
+            }
+            makeTask() {
+                let result = 0
+                let stop = false
+                while (!stop) {
+                    let rndNumber = getRandomInt(1, 10)
+
+                    result = parseInt(prompt(`Скільки буде ${this.number} * ${rndNumber}`))
+                    this.checkAnsver(result, rndNumber)
+
+                    stop = confirm('Зупинитись вирішувати приклади')
+                }
+                this.render()
+            }
+            checkAnsver(result, rndNumber) {
+                (result == this.number * rndNumber) ? this.correct++ : this.incorrect++
+            }
+            render() {
+                document.write(`Правильних відповідей ${this.correct}<br>`)
+                document.write(`НЕправильних відповідей ${this.incorrect}<br>`)
+            }
+        }
+
+        let Ex1 = new MultChecker(7, 0, 0)
+        Ex1.makeTask()
+    </script>
+
+</body>
+
+</html>

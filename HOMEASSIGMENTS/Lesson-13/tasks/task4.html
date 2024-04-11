@@ -14,8 +14,25 @@
     </p>
 
     <script>
+        function generateDanceCombinations(boys, girls, currentCombination = []) {
+            // Базовий випадок: якщо усі хлопці вже обрані, виводимо поточну комбінацію
+            if (boys.length === 0) {
+                console.log(currentCombination.join(' - '));
+                return;
+            }
 
-        document.write(`Пока нема`)
+            // Рекурсивний крок: для кожного хлопця спробуємо обрати дівчинку
+            for (let i = 0; i < girls.length; i++) {
+                generateDanceCombinations(boys.slice(1), girls.slice(0, i).concat(girls.slice(i + 1)), [...currentCombination, `${boys[0]} - ${girls[i]}`]);
+            }
+        }
+
+        // Приклад використання:
+        const boys = ['Tom', 'Jack', 'John'];
+        const girls = ['Emily', 'Lucy', 'Emma'];
+
+        generateDanceCombinations(boys, girls);
+        document.write(`Виведено в console.log`)
     </script>
 
 </body>

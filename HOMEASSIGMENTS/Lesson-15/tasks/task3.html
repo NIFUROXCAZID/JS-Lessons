@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№15</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 2. Створити об’єкт «Авто».<br>
+        Поля(властивості) Марка Розмір бака Кількість наявних літрів Кількість місць Кількість пасажирів <br>
+        Методи (дії) Заправка на вказану кількість літрів Виведення кількості пасажирів Додавання пасажирів Висадка пасажирів<br>
+    </p>
+
+    <script>
+        let auto = {
+            brand: 'Lamborghini LM002',
+            tankSize: 290,
+            currentFuel: 0,
+            seats: 5,
+            passangers: 0,
+
+            fuelLoad: function (fuel) {
+                if (this.currentFuel + fuel > this.tankSize) {
+                    this.currentFuel = this.tankSize
+                    document.write(`Бак заправлено на максимум і ще залишилось зайве<br>`)
+                } else {
+                    this.currentFuel += fuel
+                    document.write(`Бак заправлено. Кількість бензину зараз ${this.currentFuel}<br>`)
+                }
+            },
+            showPassangersCount: function () {
+                document.write(`Поточна кількість пасажирів ${this.passangers}<br>`)
+            },
+            addPassangers: function (newPassangers) {
+                if (this.passangers + newPassangers > this.seats) {
+                    this.passangers = this.seats
+                    document.write(`Кількість пасажирів тепер максимальна і всі не влізли<br>`)
+                } else {
+                    this.passangers += newPassangers
+                    document.write(`Кількість пасажирів тепер ${this.passangers}<br>`)
+                }
+            },
+            removePassangers: function (remPassengers) {
+                this.passangers -= remPassengers
+                if (this.passangers <= 0) {
+                    document.write(`Всіх пасажирів прибрали<br>`)
+                } else {
+                    document.write(`Залишилось пасажирів тепер ${this.passangers}<br>`)
+                }
+            },
+        }
+
+        let fuel = parseInt(prompt("Введіть кількість бензину для заливання:"))
+        auto.fuelLoad(fuel)
+        auto.showPassangersCount()
+        let newPassangers = parseInt(prompt("Введіть Кількість пасажирів на додавання:"))
+        auto.addPassangers(newPassangers)
+        let remPassengers = parseInt(prompt("Введіть Кількість пасажирів для висадки:"))
+        auto.removePassangers(remPassengers)
+    </script>
+</body>
+
+</html>

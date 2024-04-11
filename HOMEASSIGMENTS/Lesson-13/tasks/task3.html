@@ -16,7 +16,44 @@
     </p>
 
     <script>
-        document.write(`Пока нема`)
+        function printAllPossibleMoves(board, player) {
+            const emptyCells = []
+
+            for (let i = 0; i < board.length; i++) {
+                for (let j = 0; j < board[i].length; j++) {
+                    if (board[i][j] === ' ') {
+                        emptyCells.push([i, j]);
+                    }
+                }
+            }
+            function exploreMoves(index = 0) {
+                if (index === emptyCells.length) {
+                    console.log(board.map(row => row.join(' | ')).join('\n---------\n'))
+                    console.log('\n')
+                    return
+                }
+
+                const [row, col] = emptyCells[index]
+
+                board[row][col] = player
+
+                exploreMoves(index + 1)
+
+                board[row][col] = ' '
+
+                exploreMoves(index + 1)
+            }
+            exploreMoves()
+        }
+
+        const board = [
+            ['X', 'O', 'X'],
+            [' ', ' ', 'O'],
+            [' ', ' ', ' ']
+        ]
+
+        printAllPossibleMoves(board, 'X')
+        document.write(`Виведено в console.log`)
     </script>
 </body>
 

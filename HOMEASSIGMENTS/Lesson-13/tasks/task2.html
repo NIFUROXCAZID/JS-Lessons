@@ -15,7 +15,37 @@
     </p>
 
     <script>
-        document.write(`Пока нема`)
+        function generatePermutations(names, result = []) {
+            if (names.length === 1) {
+                result.push([names[0]])
+                return result
+            }
+
+            const first = names[0]
+            const rest = names.slice(1)
+            const permutations = generatePermutations(rest)
+
+            const newPermutations = [];
+            for (const perm of permutations) {
+                for (let i = 0; i <= perm.length; i++) {
+                    const copy = [...perm]
+                    copy.splice(i, 0, first)
+                    newPermutations.push(copy)
+                }
+            }
+            return newPermutations
+        }
+
+        function printCompetitionResults(names) {
+            const permutations = generatePermutations(names)
+            for (let i = 0; i < permutations.length; i++) {
+                console.log(`Варіант ${i + 1}: ${permutations[i].join(', ')}`)
+            }
+        }
+
+        const names = ['Спортсмен1', 'Спортсмен2', 'Спортсмен3']
+        printCompetitionResults(names)
+        document.write(`Виведено в console.log`)
     </script>
 </body>
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№15</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+
+    <p>
+        Задача 4. Розробити клас Baner<br>
+        Поля Масив об’єктів ( графічних зображень та посилань на сайти)<br>
+        методи Метод випадкового вибору об’єкта (графічного зображення та посилання) Метод виведення випадкового банера<br>
+    </p>
+
+    <script>
+        function getRandomInt(min = 1, max = 100) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        class Baner {
+            constructor(refObjectsArr) {
+                this.Arr = refObjectsArr
+            }
+            getRandomChoice() {
+                let rndIndex = getRandomInt(0, this.Arr.length - 1)
+                return this.Arr[rndIndex]
+            }
+            showBaner() {
+                let banerForShow = this.getRandomChoice() // Якщо я правильно розумію то отримую посилання на обєкт
+                document.write(`<a href="${banerForShow.ref}"><img src="${banerForShow.img}" alt="Image"></a>`)
+            }
+        }
+
+        let bestImmersiveSimGames = new Baner([
+            baner1 = {
+                img: "./deathloop.png",
+                ref: "https://store.steampowered.com/app/1252330/DEATHLOOP/",
+            },
+            baner2 = {
+                img: "./deus-ex.png",
+                ref: "https://store.steampowered.com/app/337000/Deus_Ex_Mankind_Divided/",
+            },
+            baner3 = {
+                img: "./dishonored.png",
+                ref: "https://store.steampowered.com/app/403640/Dishonored_2/",
+            },
+        ])
+        bestImmersiveSimGames.showBaner()
+    </script>
+</body>
+
+</html>

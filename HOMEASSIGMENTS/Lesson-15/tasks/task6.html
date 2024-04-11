@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№15</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        Задача 5. Розробити клас «Керівник танців»<br>
+        Поля Масив імен хлопців Масив імен дівчат<br>
+        Методи Метод випадкового вибору імені хлопця Метод випадкового вибору імені дівчини<br>
+        Метод виведення пари для танців Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців<br>
+    </p>
+
+    <script>
+        function getRandomInt(min = 1, max = 100) {
+            min = Math.ceil(min)
+            max = Math.floor(max)
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        class DanceManager {
+            constructor(showInterval, theBoys, theGirls) {
+                this.interval = showInterval
+                this.boys = theBoys
+                this.girls = theGirls
+            }
+
+            getRandomBoy() {
+                let rndIndex = getRandomInt(0, this.boys.length - 1)
+                return this.boys[rndIndex]
+            }
+            getRandomGirls() {
+                let rndIndex = getRandomInt(0, this.girls.length - 1)
+                return this.girls[rndIndex]
+            }
+            showPair() {
+                let boy = this.getRandomBoy()
+                let girl = this.getRandomGirls()
+                document.write(`Хлопчик на імья ${boy} буде з дівчинкою на імья ${girl}<br>`)
+            }
+            run() {
+                setInterval(() => {
+                    this.showPair()
+                }, this.interval)
+            }
+        }
+
+        let grooving = new DanceManager(5000,
+            ['Flinn', 'Roui', 'Alek', 'Kudrett', 'Maresteil', 'Elias'],
+            ['Junyver', 'Ruby', 'Abella', 'Karin', 'Marna', 'Alice'])
+        grooving.run()
+    </script>
+</body>
+
+</html>

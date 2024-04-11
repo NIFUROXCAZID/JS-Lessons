@@ -15,7 +15,20 @@
     </p>
 
     <script>
-        document.write(`Пока нема`)
+        function generateSubsets(array, index = 0, subset = [], subsets = []) {
+            if (index === array.length) {
+                subsets.push(subset)
+                return
+            }
+            generateSubsets(array, index + 1, subset.concat(array[index]), subsets)
+            generateSubsets(array, index + 1, subset, subsets)
+            return subsets
+        }
+
+        const array = [1, 2, 3]
+        const allSubsets = generateSubsets(array)
+        console.log(allSubsets)
+        document.write(`Виведено в console.log`)
     </script>
 
 </body>
