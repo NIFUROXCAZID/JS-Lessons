@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№16</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 3. Об’єкт “Фірма” (використати члени-класи)<br>
+        поля<br>
+        ▪ назва фірми;<br>
+        ▪ дата заснування (рік, місяць);<br>
+        ▪ послуги (назва послуги, вартість, термін виконання);<br>
+        ▪ адреси філіалів (країна, місто, вулиця, номер будинку);<br>
+        методи<br>
+        ▪ визначення кількості років існування фірми;<br>
+        ▪ виведення всіх філіалів фірми у вказаному місті;<br>
+        ▪ виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;<br>
+    </p>
+
+    <script>
+        class Firm {
+            constructor(name, foundationYear, services, branches) {
+                this.name = name
+                this.foundationYear = foundationYear
+                this.services = services
+                this.branches = branches
+            }
+
+            yearsInBusiness() {
+                const currentDate = new Date()
+                const currentYear = currentDate.getFullYear()
+                const currentMonth = currentDate.getMonth() + 1
+                let years = currentYear - this.foundationYear
+                if (currentMonth < 1) {
+                    years -= 1
+                }
+                return years
+            }
+
+            findBranchesInCity(city) {
+                const branchesInCity = this.branches.filter(branch => branch.city === city)
+                return branchesInCity
+            }
+
+            findServicesByBudgetAndTime(budget, time) {
+                const affordableServices = this.services.filter(service => {
+                    return service.cost <= budget && service.duration <= time
+                })
+                return affordableServices
+            }
+
+            displayServices(services) {
+                services.forEach(service => {
+                    document.write(`Послуги: ${service.name}, Вартість: ${service.cost}, Термін: ${service.duration}<br>`)
+                })
+            }
+
+            toString() {
+                return `Фірма: ${this.name}, Рік заснування: ${this.foundationYear}, Років у бізнесі: ${this.yearsInBusiness()}`
+            }
+        }
+
+        const firmServices = [
+            { name: "Web Development", cost: 1500, duration: 30 },
+            { name: "Graphic Design", cost: 1000, duration: 20 },
+            { name: "Marketing", cost: 2000, duration: 40 }
+        ]
+
+        const firmBranches = [
+            { country: "USA", city: "New York", street: "Broadway", number: 123 },
+            { country: "USA", city: "Los Angeles", street: "Hollywood Blvd", number: 456 },
+            { country: "UK", city: "London", street: "Oxford St", number: 789 }
+        ]
+
+        const amogusFirm = new Firm("Amogus Firm", 2000, firmServices, firmBranches);
+
+        document.write(`Років у бізнесі: ${amogusFirm.yearsInBusiness()}<br>`);
+        document.write(`<br>`)
+
+        document.write("Філіали у New York: <br>");
+        for (const [key, value] of Object.entries(amogusFirm.findBranchesInCity("New York"))) {
+            for (const [key, value2] of Object.entries(value)) {
+                document.write(` ${value2}, &nbsp `)
+            }
+            document.write(`<br>`)
+        }
+        document.write(`<br>`)
+
+        document.write("Доступні послуги: <br>");
+        const affordableServices = amogusFirm.findServicesByBudgetAndTime(4500, 50);
+        amogusFirm.displayServices(affordableServices);
+
+        document.write(`<br>`)
+        document.write(`${amogusFirm.toString()} <br>`);
+
+
+
+        // class Firm {
+        //     #founding
+        //     constructor(title, founding, services, adresses) {
+        //         this.title = title
+        //         this._founding = founding
+        //         this.services = services
+        //         this.adresses = adresses
+        //     }
+        //     get _founding() {
+        //         return this.#founding
+        //     }
+        //     set _founding(newFounding) {
+        //         this.#founding = JSON.parse(JSON.stringify(newFounding))
+        //     }
+        // }
+
+        // class Foundation {
+        //     constructor(year, month) {
+        //         this.year = year
+        //         this.month = month
+        //     }
+        // }
+        // let fond1 = new Foundation(705, 6)
+
+        // class Services {
+        //     constructor(title, cost, time) {
+        //         this.title = title
+        //         this.cost = cost
+        //         this.time = time
+        //     }
+        // }
+        // let srv1 = new Services("Living", "250", "24")
+        // let srv2 = new Services("Bathing", "50", "4")
+
+        // class Adress {
+        //     constructor(country, town, street, house) {
+        //         this.country = country
+        //         this.town = town
+        //         this.street = street
+        //         this.house = house
+        //     }
+        // }
+        // let adr1 = new Adress("Japan", "Хаякава", "", "")
+        // let title1 = 'Нисияма Онсэн Кэйункан'
+        // // ці люди грають в симулятор готелю вже протягом 1300 років й їм не набридло.
+        // // В наступному житті обовьязково поїду туди
+
+        // let firm1 = new Firm(title1, fond1, srv1, adr1)
+
+        // document.write(`<br>`)
+        // document.write(`${firm1.title}<br>`)
+        // document.write(`<br>`)
+        // for (const [key, value] of Object.entries(firm1._founding)) {
+        //     document.write(`${key}  ${value} <br>`)
+        // }
+        // document.write(`<br>`)
+        // for (const [key, value] of Object.entries(firm1.services)) {
+        //     document.write(`${key}  ${value} <br>`)
+        // }
+        // document.write(`<br>`)
+        // for (const [key, value] of Object.entries(firm1.adresses)) {
+        //     document.write(`${key}  ${value} <br>`)
+        // }
+
+    </script>
+</body>
+
+</html>

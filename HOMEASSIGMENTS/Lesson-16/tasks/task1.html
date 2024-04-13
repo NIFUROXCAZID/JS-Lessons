@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№16</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Створити клас TDate для роботи із датами у форматі “день.місяць.рік”.<br>
+        Дата представляється структурою із трьома полями.<br>
+        Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років.<br>
+        Введення та виведення дати реалізувати за допомогою методу toString.<br>
+    </p>
+
+    <script>
+        class TDate {
+            #month
+            #day
+            constructor(day, month, year) {
+                this.Day = day
+                this.Month = month
+                this.year = year
+            }
+            get Day() {
+                return this.#day
+            }
+            get Month() {
+                return this.#month
+            }
+            set Day(newDay) {
+                if (newDay < 0 || newDay > 30)
+                    throw new Error('Некорректний день, (має бути від 1 до 30)')
+                this.#day = newDay
+            }
+            set Month(newMonth) {
+                if (newMonth < 0 || newMonth > 12)
+                    throw new Error('Некорректний місяць, (має бути від 1 до 12)')
+                this.#month = newMonth
+            }
+            toString() {
+                return `${this.Day} -  ${this.Month} - ${this.year} `
+            }
+            returnToDate(days) {
+                this.year = Math.floor(days / 365)
+                let remainingDays = days % 365
+                this.#month = Math.floor(remainingDays / 30)
+                this.#day = remainingDays % 30
+            }
+            daysGone() {
+                let currnetDays = this.#day + this.#month * 30 + this.year * 365
+                return currnetDays
+            }
+            changeDay(daysValue) {
+                let newDays = this.daysGone() + daysValue
+                this.returnToDate(newDays)
+            }
+            changeMonth(monthValue) {
+                let newDays = this.daysGone() + monthValue * 30
+                this.returnToDate(newDays)
+            }
+            changeYear(yarsValue) {
+                let newDays = this.daysGone() + yarsValue * 365
+                this.returnToDate(newDays)
+            }
+        }
+
+        const date1 = new TDate(8, 2, 2002)
+
+        document.write(date1)
+        document.write(`<br>`)
+        date1.changeDay(-100) // Можна збільшувать зменшувать
+        document.write(date1)
+        document.write(`<br>`)
+        date1.changeMonth(-20) // Можна збільшувать зменшувать
+        document.write(date1)
+        document.write(`<br>`)
+        date1.changeYear(-3) // Можна збільшувать зменшувать
+        document.write(date1)
+        document.write(`<br>`)
+    </script>
+
+</body>
+
+</html>

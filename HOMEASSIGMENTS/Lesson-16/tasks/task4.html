@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№16</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 4. Створити клас TBankomat, який моделює роботу банкомата.<br>
+        Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень.<br>
+        Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.<br>
+    </p>
+
+    <script>
+        class TBankomat {
+            #bancnots
+            constructor(money) {
+                this._bancnots = money
+            }
+            get _bancnots() {
+                return this.#bancnots
+            }
+            set _bancnots(newBanknotsObj) {
+                for (const value of Object.values(newBanknotsObj)) {
+                    if (value <= 0) {
+                        throw new Error('Некорректне значення кількості банкнот, має бути більше 0')
+                    }
+                }
+                this.#bancnots = JSON.parse(JSON.stringify(newBanknotsObj))
+                // Ну якщо ми повністю копіюємо і отримуємо захищений обєкт то і його поля теж під захистом в певному сенсі
+            }
+            toString() {
+                return `${this._bancnots}`
+            }
+            maxGive() {
+                let maxSum = this.#bancnots.banknote_5 * 5 + this.#bancnots.banknote_10 * 10 + this.#bancnots.banknote_20 * 20 +
+                    this.#bancnots.banknote_50 * 50 + this.#bancnots.banknote_100 * 100 + this.#bancnots.banknote_200 * 200
+                return maxSum
+            }
+            minGive() {
+                let smallKey = ''
+                for (const key in this.#bancnots) {
+                    if (this.#bancnots[key] > 0) {
+                        smallKey = key
+                        break
+                    }
+                }
+                switch (smallKey) {
+                    case "banknote_5":
+                        return 5
+                    case "banknote_10":
+                        return 10
+                    case "banknote_20":
+                        return 20
+                    case "banknote_50":
+                        return 50
+                    case "banknote_100":
+                        return 100
+                    case "banknote_200":
+                        return 200
+                    default:
+                        return "У банкоматі немає банкнот"
+                }
+            }
+            getCash(cash) {
+                if (cash < this.maxGive()) {
+                    const gotMoney = {};
+
+                    const denominations = [200, 100, 50, 20, 10, 5]
+                    for (const element of denominations) {
+                        const numNotes = Math.min(Math.floor(cash / element), this.#bancnots[`banknote_${element}`]);
+                        if (numNotes > 0) {
+                            gotMoney[`banknote_${element}`] = numNotes;
+                            this.#bancnots[`banknote_${element}`] -= numNotes
+                            cash -= numNotes * element;
+                        }
+                        if (cash === 0) {
+                            break
+                        }
+                    }
+                    // Блін який крутий алгоритм ну я трохи піддивився, сам би я так не додумався перевіряти
+                    // за допомогою mathmin чи є щі купюри і т д. 
+                    if (cash === 0) {
+                        return gotMoney
+                    } else {
+                        throw new Error('У банкоматі недостатньо коштів для зняття вказаної суми')
+                    }
+                } else {
+                    throw new Error('Запитана сума перевищує максимальну суму, яку може зняти банкомат')
+                }
+            }
+        }
+
+        let banks = {
+            banknote_5: 1000,
+            banknote_10: 800,
+            banknote_20: 700,
+            banknote_50: 500,
+            banknote_100: 400,
+            banknote_200: 300,
+        }
+        let bank = new TBankomat(banks)
+
+        for (const [key, value] of Object.entries(bank._bancnots)) {
+            document.write(`Банкнот типу ${key} в наявності ${value} <br>`)
+            // О та штука з методички по обєктах знадобилась
+        }
+
+        document.write(`<br>`)
+        document.write(`Найбільша сума що можна зняти ${bank.maxGive()} <br>`)
+        document.write(`Найнменша сума що можна зняти ${bank.minGive()} <br>`)
+        document.write(`<br>`)
+
+        let loalty = 13225
+        // loalty = 9965443
+        let mySin = bank.getCash(loalty)
+        for (const key in mySin) {
+            const value = mySin[key];
+            document.write(`Банкнот типу ${key} отримано ${value} <br>`)
+        }
+
+        document.write(`<br>`)
+        for (const [key, value] of Object.entries(bank._bancnots)) {
+            document.write(`Банкнот типу ${key} в наявності ${value} <br>`)
+        }
+        // НІ НУ ЦЕ РІЛ ПРИКОЛЬНА ЗАДАЧА
+        // ++ ДО ОБЄКТІВ І ++ ДО КЛАСІВ
+
+        // document.write(bank._bancnots.banknote_5);
+        // bank._bancnots.banknote_5 = 55
+        // banks.banknote_5 = 99
+
+        // document.write(bank._bancnots.banknote_5);
+        // document.write(banks.banknote_5);
+    </script>
+
+</body>
+
+</html>

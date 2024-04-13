@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№16</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Створити клас TMoney для роботи з грошовими сумами.<br>
+        Сума повинна зберігатися у вигляді доларового еквіваленту.<br>
+        Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях,<br>
+        та визначення курсу долара, при якому сума у гривнях збільшиться на 100.<br>
+        Курс долара зберігати в окремому полі.<br>
+    </p>
+
+    <script>
+        class TMoney {
+            #userMoney
+            #dollarCourse
+            constructor(money, course) {
+                this._dollarCourse = course
+                this._userMoney = money
+            }
+            get _dollarCourse() {
+                return this.#dollarCourse
+            }
+            set _dollarCourse(newDollarCourse) {
+                if (newDollarCourse <= 8)
+                    throw new Error('Такого не буває, долар ніколи не стане знову по 8, змирись, це програмна помилка або сон, тобі це лише здалося.')
+                this.#dollarCourse = newDollarCourse
+            }
+            get _userMoney() {
+                return this.#userMoney
+            }
+            set _userMoney(newUserMoney) {
+                if (newUserMoney < 0)
+                    throw new Error('Неккоректне значення грошей, значення має бути >= 0')
+                this.#userMoney = newUserMoney / this._dollarCourse
+            }
+            changeMoney(changingBalance) {
+                if (this.#userMoney + changingBalance / this._dollarCourse < 0)
+                    throw new Error('Недопустима операція, фінальне значення має бути >= 0')
+                this.#userMoney += changingBalance / this._dollarCourse
+            }
+            inflation() {
+                if (this.#userMoney == 0) return `ВИ БІДНИЙ, інфляція вас не врятує`
+                let userGrn = this.#userMoney * this._dollarCourse
+                let newInflation = (userGrn + 100) * this._dollarCourse / userGrn
+                return newInflation
+            }
+            toString() {
+                return `Поточний купс долара ${this._dollarCourse} <br>
+                Поточний баланс доларів ${this._userMoney} <br>
+                Курс при якому сума у гривнях збільшиться на сто ${this.inflation()} <br>`
+            }
+        }
+
+        let poverty = new TMoney(8000, 40)
+        poverty.changeMoney(-7000)
+        document.write(poverty)
+    </script>
+</body>
+
+</html>
