@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№18</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)<br>
+    </p>
+    <label>
+        Сума в гривнях
+        <input id="grn" type="number" value="0" />
+    </label>
+    <p><button onclick="convert()">Конвертувати</button></p>
+
+    <p>
+        <label>
+            Сума в євро
+            <input id="euro" type="number" placeholder="Result" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Сума в доларах
+            <input id="dollar" type="number" placeholder="Result" />
+        </label>
+    </p>
+
+
+
+    <script>
+        function convert() {
+            const grn = parseFloat(document.getElementById('grn').value)
+            const dollarCourse = 39.78
+            const euroCourse = 42.38
+
+            const euroSum = (grn / euroCourse).toFixed(2)
+            const dollarSum = (grn / dollarCourse).toFixed(2)
+            document.getElementById('euro').value = euroSum
+            document.getElementById('dollar').value = dollarSum
+        }
+
+    </script>
+</body>
+
+</html>

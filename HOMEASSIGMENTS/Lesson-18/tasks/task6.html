@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№18</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        Задача 6. Користувач задає кількість оцінок і натискає на кнопку «get table».<br>
+        В результаті формується таблиця з input, куди користувач вводить оцінки.<br>
+        Після цього натискає на кнопку “get sum” і знаходить середнє значення.<br>
+    </p>
+    Price number:
+    <input id="gradesCount" type="number" value="1" />
+    </label>
+    <div><button onclick="createTable()">Get table</button></div>
+
+    <div id="tableContainer"></div>
+
+    <div><button onclick="calculateAverage()">Get sum</button></div>
+    <p id="averageOutput">sum = </p>
+
+    <script>
+        function createTable() {
+            const gradesCount = parseInt(document.getElementById('gradesCount').value)
+            const tableEl = document.createElement('table')
+            for (let r = 0; r < 1; r++) {
+                const trEl = document.createElement('tr')
+                for (let c = 0; c < gradesCount; c++) {
+                    const tdEl = document.createElement('td')
+                    const inputEl = document.createElement('input')
+                    inputEl.type = 'number'
+                    tdEl.appendChild(inputEl)
+                    trEl.appendChild(tdEl)
+                }
+                tableEl.appendChild(trEl)
+            }
+            const tableContainer = document.getElementById('tableContainer')
+            tableContainer.innerHTML = ''
+            tableContainer.appendChild(tableEl)
+        }
+
+        function calculateAverage() {
+            const inputs = document.querySelectorAll('#tableContainer input[type="number"]')
+            let sum = 0
+            inputs.forEach(input => {
+                sum += parseFloat(input.value) || 0
+            });
+            const average = sum / inputs.length;
+            const averageOutput = document.getElementById('averageOutput')
+            averageOutput.textContent = 'Average grade = ' + (average || 0)
+        }
+    </script>
+
+
+
+</body>
+
+</html>

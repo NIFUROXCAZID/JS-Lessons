@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№18</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>
+        Задача 7. Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту<br>
+        (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx)<br>
+        та одного з 3-х гідів(використати - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.<br>
+    </p>
+    <div style="display: flex; gap: 150px;">
+        <div>
+            <h2>ЕТАП 1</h2>
+            <div>
+                <label for="cars">Choose a transport:</label>
+                <select name="transport1">
+                    <option value="800">Car - 800</option>
+                    <option value="500">Bus - 500</option>
+                    <option value="450">Plane - 450</option>
+                </select>
+            </div>
+            <div>
+                <h3>Dishes:</h3>
+                <input type="checkbox" name="food" value="100">
+                <label for="food">Завтрак</label><br>
+                <input type="checkbox" name="food" value="250">
+                <label for="food">Обід</label><br>
+                <input type="checkbox" name="food" value="150">
+                <label for="food">Вечеря</label><br>
+            </div>
+            <div>
+                <h2>Choose your guide:</h2>
+                <input type="radio" name="guide1" value="250">
+                <label for="guide">Amogus</label><br>
+                <input type="radio" name="guide1" value="150">
+                <label for="guide">Juniver</label><br>
+                <input type="radio" name="guide1" value="400">
+                <label for="guide">Kudret</label><br>
+            </div>
+        </div>
+        <!-- ------------------------------------------ -->
+        <div>
+            <h2>ЕТАП 2</h2>
+            <div>
+                <label for="cars">Choose a transport:</label>
+                <select name="transport2">
+                    <option value="800">Car - 800</option>
+                    <option value="500">Bus - 500</option>
+                    <option value="450">Plane - 450</option>
+                </select>
+            </div>
+            <div>
+                <h3>Dishes:</h3>
+                <input type="checkbox" name="food" value="100">
+                <label for="food">Завтрак</label><br>
+                <input type="checkbox" name="food" value="250">
+                <label for="food">Обід</label><br>
+                <input type="checkbox" name="food" value="150">
+                <label for="food">Вечеря</label><br>
+            </div>
+            <div>
+                <h2>Choose your guide:</h2>
+                <input type="radio" name="guide2" value="250">
+                <label for="guide">Amogus</label><br>
+                <input type="radio" name="guide2" value="150">
+                <label for="guide">Juniver</label><br>
+                <input type="radio" name="guide2" value="400">
+                <label for="guide">Kudret</label><br>
+            </div>
+        </div>
+        <!-- ------------------------------------------ -->
+        <div>
+            <h2>ЕТАП 3</h2>
+            <div>
+                <label for="cars">Choose a transport:</label>
+                <select name="transport3">
+                    <option value="800">Car - 800</option>
+                    <option value="500">Bus - 500</option>
+                    <option value="450">Plane - 450</option>
+                </select>
+            </div>
+            <div>
+                <h3>Dishes:</h3>
+                <input type="checkbox" name="food" value="100">
+                <label for="food">Завтрак</label><br>
+                <input type="checkbox" name="food" value="250">
+                <label for="food">Обід</label><br>
+                <input type="checkbox" name="food" value="150">
+                <label for="food">Вечеря</label><br>
+            </div>
+            <div>
+                <h2>Choose your guide:</h2>
+                <input type="radio" name="guide3" value="250">
+                <label for="guide">Amogus</label><br>
+                <input type="radio" name="guide3" value="150">
+                <label for="guide">Juniver</label><br>
+                <input type="radio" name="guide3" value="400">
+                <label for="guide">Kudret</label><br>
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 50px;">
+        <button onclick="calculateTotal()">Calculate Total</button>
+        <div id="totalOutput">Total: </div>
+    </div>
+    <script>
+        function calculateTotal() {
+            let total = 0
+
+            const selectCollection = document.querySelectorAll('select[name^="transport"]')
+
+            selectCollection.forEach(select => {
+                total += parseInt(select.value)
+            })
+
+            const foodCheckboxes = document.querySelectorAll('input[name="food"]:checked')
+            foodCheckboxes.forEach(checkbox => {
+                const foodPrice = parseInt(checkbox.value)
+                total += foodPrice
+            })
+
+            const checkboxes = document.querySelectorAll('input[name^="guide"]:checked')
+            checkboxes.forEach(checkbox => {
+                total += parseInt(checkbox.value)
+            })
+
+            const totalOutput = document.getElementById('totalOutput')
+            totalOutput.textContent = 'Total: ' + total
+            // О отак можна все швидко порахувать навіть якщо багато всяких елементів
+        }
+    </script>
+
+</body>
+
+</html>

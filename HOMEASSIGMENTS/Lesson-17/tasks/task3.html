@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        3. Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст)<br>
+        і також виводиться порядковий номер скільки раз вже нагадування було.<br>
+        Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів.<br>
+        Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.<br>
+    </p>
+
+    <script>
+        class Reminder {
+            constructor(message, intervalInSeconds) {
+                if (Reminder.instance) {
+                    return Reminder.instance
+                }
+
+                this.message = message
+                this.intervalInSeconds = intervalInSeconds
+                this.reminderCount = 0
+                this.timer = setInterval(this.remind.bind(this), this.intervalInSeconds * 1000)
+                // Добряче зрозуміти правильний контекст виклику
+
+                Reminder.instance = this
+            }
+
+            remind() {
+                this.reminderCount++
+                document.write(`Нагадування №${this.reminderCount}: ${this.message}<br>`)
+            }
+
+            changeMessage(newMessage) {
+                this.message = newMessage
+            }
+
+            stopTimer() {
+                clearInterval(this.timer)
+            }
+        }
+
+        const reminder = new Reminder("ඞ Я більше цього не витримаю ඞ", 5);
+        reminder.changeMessage("Я бачу червоного пінгвіна особливо в таку дощову погоду.")
+        // reminder.stopTimer()
+
+
+    </script>
+</body>
+
+</html>

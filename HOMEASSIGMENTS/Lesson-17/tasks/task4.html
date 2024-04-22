@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        4. Склад. База товарів, які зберігаються на складі:<br>
+        назва товару, одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер).<br>
+        Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою фірми<br>
+    </p>
+
+    <script>
+    class Product {
+        constructor(initData) {
+            this.title = initData.title
+            this.measure = initData.measure
+            this.count = initData.count
+            this.firm = new Firm(initData) // Композиція
+        }
+    }
+
+    class Firm {
+        constructor({ firmTitle, registrationNumber }) {
+            this.firmTitle = firmTitle
+            this.registrationNumber = registrationNumber
+        }
+    }
+
+    class Storage {
+        constructor() {
+            this.products = []
+        }
+
+        addProduct(product) {
+            this.products.push(product) // агрегація
+        }
+
+        filterByName(title) {
+            return this.products.filter(product => product.title === title)
+        }
+
+        filterByFirm(firmTitle) {
+            return this.products.filter(product => product.firm.firmTitle === firmTitle)
+        }
+    }
+
+    // Приклад використання
+    let amazon = new Storage()
+
+    let product1 = new Product({ title: 'Misery', measure: 'шт', count: 30, firmTitle: "ST-king", registrationNumber: 1488228 })
+    let product2 = new Product({ title: 'Hopeless', measure: 'шт', count: 30, firmTitle: "Artur", registrationNumber: 1488228 })
+
+    amazon.addProduct(product1)
+    amazon.addProduct(product2)
+
+    console.log(amazon.filterByName('Misery'))
+    console.log(amazon.filterByFirm("Artur"))
+
+
+    </script>
+
+</body>
+
+</html>

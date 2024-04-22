@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        6. Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати),<br>
+        AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати).<br>
+        Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів<br>
+        Приклад.<br>
+        testsList= [<br>
+        {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},<br>
+        {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},<br>
+        ]<br>
+        Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля.<br>
+        Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач<br>
+        (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування. Результати тестування додаються в об’єкт History.<br>
+        Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.<br>
+
+    </p>
+
+    <script>
+        class TestData {
+            constructor(firstNum, secondNum, operation, userAnswer, correctAnswer) {
+                this.firstNum = firstNum
+                this.secondNum = secondNum
+                this.operation = operation
+                this.userAnswer = userAnswer
+                this.correctAnswer = correctAnswer
+            }
+        }
+
+        class History {
+            constructor() {
+                this.testsList = []
+            }
+
+            addTest(testData) {
+                this.testsList.push(testData)
+            }
+
+            displayHistory() {
+                console.log(this.testsList)
+            }
+        }
+
+        // Клас для перевірки таблиці множення
+        class MultChecker {
+            constructor(history) {
+                this.history = history
+            }
+
+            generateTest() {
+                let firstNum = Math.floor(Math.random() * 10) + 1
+                let secondNum = Math.floor(Math.random() * 10) + 1
+                let correctAnswer = firstNum * secondNum; 
+                let userAnswer = Math.floor(Math.random() * 20) + 1
+                let testData = new TestData(firstNum, secondNum, '*', userAnswer, correctAnswer)
+                this.history.addTest(testData)
+            }
+        }
+
+        class AddChecker {
+            constructor(history) {
+                this.history = history
+            }
+
+            generateTest() {
+                let firstNum = Math.floor(Math.random() * 100) + 1
+                let secondNum = Math.floor(Math.random() * 100) + 1
+                let correctAnswer = firstNum + secondNum
+                let userAnswer = Math.floor(Math.random() * 200) + 1
+                let testData = new TestData(firstNum, secondNum, '+', userAnswer, correctAnswer)
+                this.history.addTest(testData)
+            }
+        }
+
+        class TestManager {
+            constructor() {
+                if (TestManager.instance) {
+                    return TestManager.instance
+                }
+                TestManager.instance = this
+
+                this.history = new History()
+                this.multChecker = new MultChecker(this.history)
+                this.addChecker = new AddChecker(this.history)
+            }
+
+            startTests(N) {
+                for (let i = 0; i < N; i++) {
+                    let randomChoice = Math.random()
+                    if (randomChoice < 0.5) {
+                        this.multChecker.generateTest()
+                    } else {
+                        this.addChecker.generateTest()
+                    }
+                }
+                setTimeout(() => {
+                    this.history.displayHistory()
+                }, 1000)
+            }
+        }
+
+        let testManager = new TestManager()
+        testManager.startTests(10)
+
+    </script>
+
+</body>
+
+</html>

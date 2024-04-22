@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№18</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Розробити калькулятор<br>
+    </p>
+    <label>
+        First number
+        <input id="first" type="number" placeholder="Type first number here" value="0" />
+    </label>
+
+    <p>
+        <label>
+            Second number
+            <input id="second" type="number" placeholder="Type second number here" value="0" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Result
+            <input id="result" type="number" placeholder="Result" />
+        </label>
+    </p>
+
+    <button onclick="sum()">Додати</button>
+    <button onclick="minus()">Відняти</button>
+    <button onclick="mult()">Помножити</button>
+    <button onclick="div()">Поділити</button>
+
+    <script>
+        function sum() {
+            const num1 = parseFloat(document.getElementById('first').value)
+            const num2 = parseFloat(document.getElementById('second').value)
+            const sum = num1 + num2
+            document.getElementById('result').value = sum
+        }
+        function minus() {
+            const num1 = parseFloat(document.getElementById('first').value)
+            const num2 = parseFloat(document.getElementById('second').value)
+            const sum = num1 - num2
+            document.getElementById('result').value = sum
+        }
+        function mult() {
+            const num1 = parseFloat(document.getElementById('first').value)
+            const num2 = parseFloat(document.getElementById('second').value)
+            const sum = num1 * num2
+            document.getElementById('result').value = sum
+        }
+        function div() {
+            const num1 = parseFloat(document.getElementById('first').value)
+            const num2 = parseFloat(document.getElementById('second').value)
+            const sum = num1 / num2
+            document.getElementById('result').value = sum
+        }
+    </script>
+
+</body>
+
+</html>

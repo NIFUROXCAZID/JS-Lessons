@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        2. Створити службове авто (водій, марка, номер).<br>
+        Створити клас таким чином, щоб можна було створити тільки один екземпляр цього класу.<br>
+    </p>
+
+    <script>
+        class ServiceCar {
+            constructor(driver, brand, number) {
+                if (ServiceCar.instance) {
+                    return ServiceCar.instance
+                }
+
+                this.driver = driver
+                this.brand = brand
+                this.number = number
+
+                ServiceCar.instance = this
+            }
+        }
+
+        const car1 = new ServiceCar("John", "Toyota", "ABC123")
+        const car2 = new ServiceCar("Juni", "Suscar", "DSP228")
+
+        console.log(car1 === car2)
+        console.log(car1)
+        console.log(car2)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        5. Особиста бібліотека. Картотека домашньої бібліотеки:<br>
+        дані книги (автори (піб, рік народження, короткий опис),<br>
+        походження книги і наявність на даний час.
+        назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)).<br>
+        Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.),<br>
+        Організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.<br>
+    </p>
+
+    <script>
+        class Author {
+            constructor(name, birthYear) {
+                this.name = name
+                this.birthYear = birthYear
+            }
+        }
+
+        class Publisher {
+            constructor(name, registrationNumber, foundationYear) {
+                this.name = name
+                this.registrationNumber = registrationNumber
+                this.foundationYear = foundationYear
+            }
+        }
+        class Book {
+            constructor(title, authorName, authorBirthYear, publisherName, publisherRegistrationNumber, publisherFoundationYear, genre) {
+                this.title = title
+                this.author = new Author(authorName, authorBirthYear)
+                this.publisher = new Publisher(publisherName, publisherRegistrationNumber, publisherFoundationYear)
+                this.genre = genre
+                this.available = true
+            }
+        }
+
+        class Library {
+            constructor() {
+                this.sections = {}
+            }
+
+            addBook(section, book) {
+                if (!this.sections[section]) {
+                    this.sections[section] = []
+                }
+                this.sections[section].push(book)
+            }
+
+            removeBook(section, title) {
+                if (this.sections[section]) {
+                    this.sections[section] = this.sections[section].filter(book => book.title !== title)
+                }
+            }
+
+            findBookByTitle(title) {
+                let foundBooks = []
+                for (let section in this.sections) {
+                    foundBooks = foundBooks.concat(this.sections[section].filter(book => book.title === title))
+                }
+                return foundBooks
+            }
+
+            findBooksByAuthor(authorName) {
+                let foundBooks = [];
+                for (let section in this.sections) {
+                    foundBooks = foundBooks.concat(this.sections[section].filter(book => book.author.name === authorName))
+                }
+                return foundBooks
+            }
+
+            findBooksByPublisher(publisherName) {
+                let foundBooks = []
+                for (let section in this.sections) {
+                    foundBooks = foundBooks.concat(this.sections[section].filter(book => book.publisher.name === publisherName))
+                }
+                return foundBooks
+            }
+        }
+
+        let library = new Library()
+
+        library.addBook("Special Literature", new Book("Book1", "Author1", 1980, "Publisher1", "123", 2000, "Fiction"))
+        library.addBook("Hobby", new Book("Book2", "Author2", 1975, "Publisher2", "456", 2005, "Non-fiction"))
+        library.addBook("Domestic Science", new Book("Book3", "Author1", 1980, "Publisher1", "123", 2000, "Cooking"))
+
+        library.removeBook("Special Literature", "Book1")
+
+        console.log(library.findBookByTitle("Book2"))
+        console.log(library.findBooksByAuthor("Author1"))
+        console.log(library.findBooksByPublisher("Publisher2"))
+
+        // Це неймовірно важко дається. Саме на цьому етапі я кинув вчити програмування 4 роки тому на другому курсі.
+    </script>
+</body>
+
+</html>

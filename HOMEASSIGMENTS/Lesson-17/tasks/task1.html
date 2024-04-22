@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№17</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        1. Створити клас, що дозволяє виконувати такі операції над масивами:<br>
+        знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)<br>
+    </p>
+
+    <script>
+        class ArrCheck {
+            static #stArr = []
+
+            static get stArr() {
+                return this.#stArr
+            }
+
+            static set stArr(newVal) {
+                this.#stArr = newVal
+            }
+            // так і тепер три статичних метода
+            static checkNegative() {
+                let negative = 0
+                for (let element of ArrCheck.#stArr) {
+                    if (element < 0) negative++
+                }
+                return negative
+            }
+
+            static checkPositive() {
+                let positive = 0
+                for (let element of ArrCheck.#stArr) {
+                    if (element > 0) positive++
+                }
+                return positive
+            }
+            static checkInputs(input) {
+                let count = 0
+                for (let element of ArrCheck.#stArr) {
+                    if (element == inputEl) count++
+                }
+                return count
+            }
+        }
+
+        let inputEl = 4
+        let testArr = [1, 2, 3, 4, 8, 6, 12, -1, 0, -15, -228, 4, -46, 22, 48, 27]
+        // ArrCheck.stArr = testArr.slice()
+        // ArrCheck.stArr = [...testArr]
+        ArrCheck.stArr = testArr // А передається все одно за значенням а не за посиланням, хмм....
+
+        document.write(`Кількість відємних елементів ${ArrCheck.checkNegative()} <br>`)
+        document.write(`Кількість додатніх елементів ${ArrCheck.checkPositive()} <br>`)
+        document.write(`Кількість входжень елемента ${inputEl} дорівнює ${ArrCheck.checkInputs(inputEl)} <br>`)
+        // Так ну от начебто
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№18</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 4. Наперед задано у скрипті масив зі списком бажань.<br>
+        Після завантаження сторінки випадковим чином вибираються<br>
+        3 і відображаються у окремих div (їх треба створити і додати на сторінку)<br>
+    </p>
+
+    <script>
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+
+        let wishes = ['Я хочу піцци', 'Я більше не можу це терпіти', 'Пляма на стіні говорить зі мною', 'Сни виготовляються з мертвих чаклунів', 'Я боюсь трогати траву', 'Треба заробити більше доларів']
+
+        wishes = shuffle(wishes) // о прикольно не надо rand функції
+        let selectedWishes = wishes.slice(0, 3)
+
+        document.addEventListener("DOMContentLoaded", function () {
+            for (let i = 0; i < 3; i++) {
+                const divEl = document.createElement('div')
+                divEl.innerHTML = selectedWishes[i]
+                document.body.appendChild(divEl)
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>
