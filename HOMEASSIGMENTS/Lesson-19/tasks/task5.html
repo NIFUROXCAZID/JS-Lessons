@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 5</h1>
+    <p>
+        Задача 5. Відображаємо картки товарів, які користувач може вибирати.<br>
+        Вибраний товар має зелену рамку (при кліку робити toogle з класом вибраного елемента)<br>
+    </p>
+    <style>
+        .card {
+            border: 5px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .selected {
+            border-color: green;
+        }
+    </style>
+    <div class="card" onclick="toggleSelection(this)">
+        Товар 1
+    </div>
+
+
+    <div class="card" onclick="toggleSelection(this)">
+        Товар 2
+    </div>
+
+
+    <div class="card" onclick="toggleSelection(this)">
+        Товар 3
+    </div>
+    <script>
+        function toggleSelection(card) {
+            card.classList.toggle('selected')
+        }
+    </script>
+</body>
+
+</html>

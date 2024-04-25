@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами<br>
+        (кількість елементів у списку випадкова від 1 до 10, елементи випадкові – від 1 до 100).<br>
+        При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, інші у червоний.<br>
+    </p>
+    <style>
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+
+        }
+
+        .divider {
+            border-top: 1px solid black;
+            margin: 10px 0;
+        }
+    </style>
+
+    <ul id="lists">
+
+    </ul>
+
+    <button id="colorButton">Змінити кольори</button>
+    <script>
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+
+        function generateRandomList() {
+            let list = document.createElement('ul')
+            let itemCount = getRandomNumber(1, 10)
+            for (let i = 0; i < itemCount; i++) {
+                let listItem = document.createElement('li')
+                listItem.textContent = getRandomNumber(1, 100)
+                list.appendChild(listItem)
+            }
+            return list
+        }
+
+        let listsContainer = document.getElementById('lists')
+        for (let i = 0; i < 5; i++) {
+            listsContainer.appendChild(generateRandomList())
+            if (i < 4) {
+                listsContainer.innerHTML += '<div class="divider"></div>'
+            }
+        }
+
+        document.getElementById('colorButton').addEventListener('click', function () {
+            let lists = document.querySelectorAll('#lists ul')
+            lists.forEach(function (list) {
+                if (list.children.length % 2 === 0) {
+                    list.classList.add('green')
+                    list.classList.remove('red')
+                } else {
+                    list.classList.add('red')
+                    list.classList.remove('green')
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

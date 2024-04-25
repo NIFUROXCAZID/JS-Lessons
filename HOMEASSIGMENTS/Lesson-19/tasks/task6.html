@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        Задача 6. Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні.<br>
+        При цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний.<br>
+        При натисканні на зелену стрілку спортсмен переміщається у список для змагань.<br>
+        При натисканні на червону стрілку спортсмен переміщається у загальний список.<br>
+    </p>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .list-item {
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .arrow {
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .arrow.red {
+            color: red;
+        }
+
+        .arrow.green {
+            color: green;
+        }
+    </style>
+    <div class="container">
+        <div class="list" id="allAthletes">
+            <div class="list-item">
+                <span class="arrow green" onclick="moveToCompetition(this, true)">➡</span>
+                Спортсмен 1
+                <span class="arrow red" onclick="moveToCompetition(this, false)">⬅</span>
+            </div>
+            <div class="list-item">
+                <span class="arrow green" onclick="moveToCompetition(this, true)">➡</span>
+                Спортсмен 2
+                <span class="arrow red" onclick="moveToCompetition(this, false)">⬅</span>
+            </div>
+            <div class="list-item">
+                <span class="arrow green" onclick="moveToCompetition(this, true)">➡</span>
+                Спортсмен 3
+                <span class="arrow red" onclick="moveToCompetition(this, false)">⬅</span>
+            </div>
+            <div class="list-item">
+                <span class="arrow green" onclick="moveToCompetition(this, true)">➡</span>
+                Спортсмен 4
+                <span class="arrow red" onclick="moveToCompetition(this, false)">⬅</span>
+            </div>
+        </div>
+
+        <div class="list" id="selectedAthletes">
+        </div>
+    </div>
+    <script>
+        function moveToCompetition(element, addToCompetition) {
+            let listItem = element.parentNode
+            let listId = addToCompetition ? 'selectedAthletes' : 'allAthletes'
+            let destinationList = document.getElementById(listId)
+            destinationList.appendChild(listItem)
+        }
+    </script>
+
+
+
+</body>
+
+</html>

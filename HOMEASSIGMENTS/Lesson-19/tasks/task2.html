@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші<br>
+        (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний),<br>
+        усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)<br>
+    </p>
+    <div class="div">
+        <input type="number" class="auto-fill">
+        <input type="number" class="auto-fill">
+        <input type="number" class="auto-fill">
+        <input type="number" class="auto-fill">
+        <input type="number" class="auto-fill">
+    </div>
+
+
+    <script>
+        let div = document.querySelector('.div')
+
+        div.addEventListener('input', function (event) {
+            if (event.target.classList.contains('auto-fill')) {
+                let inputs = Array.from(div.querySelectorAll('.auto-fill'))
+                let input = event.target
+                let index = inputs.indexOf(input)
+
+                for (let i = index + 1; i < inputs.length; i++) {
+                    inputs[i].value = parseInt(inputs[i - 1].value) + 1
+                }
+
+                for (let i = index - 1; i >= 0; i--) {
+                    inputs[i].value = parseInt(inputs[i + 1].value) - 1
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

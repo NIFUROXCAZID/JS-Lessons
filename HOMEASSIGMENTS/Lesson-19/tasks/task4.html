@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами.<br>
+        Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка<br>
+        (спробуйте додати можливість відображення кількості кліків біля назви таблиці з використанням відповідно доданого для цього атрибута).<br>
+    </p>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .red-border {
+            border: 2px solid red !important;
+        }
+    </style>
+    <!-- Таблиця 1 -->
+    <h3>Таблиця 1 <span id="table1Counter">(0)</span></h3>
+    <table id="table1">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+
+    <!-- Таблиця 2 -->
+    <h3>Таблиця 2 <span id="table2Counter">(0)</span></h3>
+    <table id="table2">
+        <tr>
+            <td>9</td>
+            <td>8</td>
+            <td>7</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>5</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+    </table>
+
+    <!-- Таблиця 3 -->
+    <h3>Таблиця 3 <span id="table3Counter">(0)</span></h3>
+    <table id="table3">
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </table>
+    <script>
+        function updateCounter(tableId) {
+            let counterSpan = document.getElementById(tableId + 'Counter')
+            let clicks = parseInt(counterSpan.textContent.slice(1, -1))
+            counterSpan.textContent = '(' + (clicks + 1) + ')'
+        }
+
+        function removeRedBorderFromAllTables() {
+            let tables = document.querySelectorAll('table')
+            tables.forEach(function (table) {
+                table.classList.remove('red-border')
+            })
+        }
+
+        let allCells = document.querySelectorAll('table td')
+        allCells.forEach(function (cell) {
+            cell.addEventListener('click', function () {
+                let tableId = this.closest('table').id
+                removeRedBorderFromAllTables()
+                updateCounter(tableId)
+                document.getElementById(tableId).classList.add('red-border')
+            })
+        })
+    </script>
+
+</body>
+
+</html>

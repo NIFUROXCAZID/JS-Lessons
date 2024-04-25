@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№19</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Дано 10 рядків тексту «Hello!» у окремих div.<br>
+        При кліку на якийсь із них усі наступні повинні бути зафарбовані у червоний колір.<br>
+    </p>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <div class="text-div">Hello!</div>
+    <script>
+        function colorNextRed(element) {
+            element.classList.add('red')
+            let nextElement = element.nextElementSibling
+
+            if (!nextElement) {
+                return;
+            }
+
+            colorNextRed(nextElement)
+        }
+
+        let textDivs = document.querySelectorAll('.text-div')
+
+        textDivs.forEach(function (div) {
+            div.addEventListener('click', function () {
+                colorNextRed(this)
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>
