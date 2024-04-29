@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№20</title>
+</head>
+
+<body>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #employeeList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #employeeList li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #employeeList li:last-child {
+            border-bottom: none;
+        }
+    </style>
+    <h1>Задача 1</h1>
+    <p>
+        Задача. Динамічний пошук. Є список працівників і поле пошуку.<br>
+        При введенні відображаються усі, які містять вказаний фрагмент<br>
+    </p>
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <ul id="employeeList">
+            <li>Abella Amogus</li>
+            <li>Juniver Maverick</li>
+            <li>Alan Wake</li>
+            <li>Levi Hijicato</li>
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput')
+            const employeeList = document.getElementById('employeeList').getElementsByTagName('li')
+
+            searchInput.addEventListener('input', function () {
+                const searchTerm = searchInput.value.toLowerCase()
+
+                Array.from(employeeList).forEach(function (element) {
+                    const employeeName = element.textContent.toLowerCase()
+
+                    if (employeeName.includes(searchTerm)) {
+                        element.style.display = 'block'
+                    } else {
+                        element.style.display = 'none'
+                    }
+                })
+            })
+        })
+
+
+    </script>
+
+</body>
+
+</html>

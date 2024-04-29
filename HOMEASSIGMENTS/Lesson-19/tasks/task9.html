@@ -9,14 +9,111 @@
 
 <body>
     <h1>Задача 9</h1>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+        }
+
+        .rabbit {
+            background-color: rgb(165, 137, 137);
+        }
+
+        .trap {
+            background-color: red;
+        }
+    </style>
     <p>
         9 Задача. У таблиці випадковим чином розташовуємо зайця. Користувач розміщує пастку. Заєць робить хід у випадковому напрямку.<br>
         Якщо заєць потрапив у пастку, то гру закінчено.<br>
         Інакше пастка зникає з попередньої позиції і користувач має можливість поставити пастку у іншій клітинці клікнувши на неї.<br>
     </p>
-
+    <table id="game-board"></table>
     <script>
+        class Game {
+                constructor(rows, cols) {
+                    this.rows = rows
+                    this.cols = cols
+                    this.board = []
+                    this.rabbitPosition = { row: 0, col: 0 }
+                    this.trapPosition = { row: 0, col: 0 }
 
+                    this.createBoard()
+                    this.placeRabbit()
+                    this.renderBoard()
+
+                    document.getElementById('game-board').addEventListener('click', this.placeTrap.bind(this))
+
+                    this.moveRabbit()
+                }
+
+                createBoard() {
+                    for (let i = 0; i < this.rows; i++) {
+                        const row = []
+                        for (let j = 0; j < this.cols; j++) {
+                            row.push(' ')
+                        }
+                        this.board.push(row)
+                    }
+                }
+
+                renderBoard() {
+                    const table = document.getElementById('game-board')
+                    table.innerHTML = '';
+                    for (let i = 0; i < this.rows; i++) {
+                        const row = document.createElement('tr')
+                        for (let j = 0; j < this.cols; j++) {
+                            const cell = document.createElement('td')
+                            if (i === this.rabbitPosition.row && j === this.rabbitPosition.col) {
+                                cell.classList.add('rabbit')
+                            } else if (i === this.trapPosition.row && j === this.trapPosition.col) {
+                                cell.classList.add('trap')
+                            }
+                            row.appendChild(cell)
+                        }
+                        table.appendChild(row)
+                    }
+                }
+
+                placeRabbit() {
+                    this.rabbitPosition.row = Math.floor(Math.random() * this.rows)
+                    this.rabbitPosition.col = Math.floor(Math.random() * this.cols)
+                }
+
+                placeTrap(event) {
+                    const row = event.target.parentNode.rowIndex
+                    const col = event.target.cellIndex
+                    this.trapPosition.row = row
+                    this.trapPosition.col = col
+                    this.renderBoard()
+                    this.moveRabbit()
+                }
+
+                moveRabbit() {
+                    const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+                    const direction = directions[Math.floor(Math.random() * directions.length)]
+                    const newRow = this.rabbitPosition.row + direction[0]
+                    const newCol = this.rabbitPosition.col + direction[1]
+                    if (newRow >= 0 && newRow < this.rows && newCol >= 0 && newCol < this.cols) {
+                        this.rabbitPosition.row = newRow
+                        this.rabbitPosition.col = newCol
+                        if (this.rabbitPosition.row === this.trapPosition.row && this.rabbitPosition.col === this.trapPosition.col) {
+                            alert('Зайчик попавсь гру закінчено.')
+                            return
+                        }
+                        this.renderBoard()
+                    }
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const game = new Game(5, 5)
+            })
     </script>
 
 </body>

@@ -9,20 +9,118 @@
 
 <body>
     <h1>Задача 10</h1>
+    <style>
+        .card {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            display: inline-block;
+            cursor: pointer;
+            perspective: 1000px;
+            border: 2px black solid;
+            background-color: grey;
+        }
+
+        .card .inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .card .inner.flip {
+            transform: rotateY(180deg);
+        }
+
+        .card .front,
+        .card .back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card .back {
+            transform: rotateY(180deg);
+        }
+    </style>
     <p>
         10 Задача. Гра «Знайти пару». Дано список зображень.<br>
         Кожне із зображень двічі використовується як фон для картки, але воно приховане.<br>
         При кліку на 2 картки їх зображення відриваються. Якщо зображення однакові, то залишаємо їх відкритими.<br>
         Інакше через 1 секунду знову приховуємо.<br>
     </p>
-
+    <div id="game-board"></div>
 
     <script>
+        class MemoryGame {
+            constructor(images) {
+                this.images = images.concat(images)
+                this.shuffle(this.images)
+                this.selectedCards = []
+                this.lockBoard = false
+                this.createBoard()
+            }
 
+            shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    
+                    [array[i], array[j]] = [array[j], array[i]]
+                }
+            }
+
+            createBoard() {
+                const gameBoard = document.getElementById('game-board')
+                this.images.forEach(image => {
+                    const card = document.createElement('div')
+                    card.className = 'card'
+                    const inner = document.createElement('div')
+                    inner.className = 'inner'
+                    card.appendChild(inner)
+                    const front = document.createElement('div')
+                    front.className = 'front'
+                    inner.appendChild(front)
+                    const back = document.createElement('div')
+                    back.className = 'back'
+                    back.style.backgroundImage = `url(${image})`
+                    inner.appendChild(back)
+                    card.addEventListener('click', () => this.flipCard(card))
+                    gameBoard.appendChild(card)
+                });
+            }
+
+            flipCard(card) {
+                if (this.lockBoard) return
+                if (card === this.selectedCards[0]) return
+                card.querySelector('.inner').classList.add('flip')
+                this.selectedCards.push(card)
+                if (this.selectedCards.length === 2) {
+                    this.lockBoard = true
+                    if (this.selectedCards[0].querySelector('.back').style.backgroundImage === this.selectedCards[1].querySelector('.back').style.backgroundImage) {
+                        this.selectedCards = []
+                        this.lockBoard = false
+                    } else {
+                        setTimeout(() => {
+                            this.selectedCards.forEach(card => card.querySelector('.inner').classList.remove('flip'))
+                            this.selectedCards = []
+                            this.lockBoard = false
+                        }, 1000)
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = [
+                'image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png', 'image6.png'
+            ]
+            const game = new MemoryGame(images)
+        })
     </script>
-
-
-
 </body>
 
 </html>

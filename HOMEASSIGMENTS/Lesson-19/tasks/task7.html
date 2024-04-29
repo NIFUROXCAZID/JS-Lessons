@@ -9,6 +9,18 @@
 
 <body>
     <h1>Задача 7</h1>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: #0051ff;
+            font-size: 30px;
+        }
+    </style>
     <p>
         7. Задача 1. Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0)<br>
         і з випадковою швидкістю рухається вниз (у setInterval викликати метод, у якому додавати крок до top).<br>
@@ -16,7 +28,35 @@
     </p>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const maxTop = window.innerHeight
+            const snowflakes = []
 
+            function createSnowflake() {
+                const snowflake = document.createElement('span')
+                snowflake.innerHTML = '&#10052;'
+                snowflake.classList.add('snowflake')
+                snowflake.style.top = '0'
+                snowflake.style.left = Math.random() * window.innerWidth + 'px'
+                document.body.appendChild(snowflake)
+                snowflakes.push(snowflake)
+            }
+
+            function moveSnowflakes() {
+                snowflakes.forEach(function (snowflake) {
+                    let top = parseFloat(snowflake.style.top)
+                    top += Math.random() * 2 + 1
+                    snowflake.style.top = top + 'px'
+
+                    if (top > maxTop) {
+                        snowflake.style.top = '0'
+                    }
+                })
+            }
+
+            setInterval(createSnowflake, 1000)
+            setInterval(moveSnowflakes, 50)
+        })
     </script>
 
 </body>
