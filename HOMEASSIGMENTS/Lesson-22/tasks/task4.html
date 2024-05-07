@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№22</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 6. Вивести скільки зараз годин у Лондоні, Парижі, Сіднеї.<br>
+    </p>
+    <script>
+        // Ну тема з Api напевно має бути ще.
+        async function getCurrentTime(city) {
+            try {
+                const response = await fetch(`https://worldtimeapi.org/api/timezone/${city}`)
+                const data = await response.json()
+                const time = new Date(data.datetime)
+                return time.toLocaleTimeString('en-US', { timeZone: data.timezone })
+            } catch (error) {
+                return `Не вдалося отримати час для міста ${city}`
+            }
+        }
+
+        // Приклад використання:
+        const cities = ['Europe/London', 'Europe/Paris', 'Australia/Sydney']
+
+        cities.forEach(async city => {
+            const currentTime = await getCurrentTime(city)
+            console.log(`Поточний час у місті ${city}: ${currentTime}`)
+        })
+
+
+    </script>
+
+</body>
+
+</html>

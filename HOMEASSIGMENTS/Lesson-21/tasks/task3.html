@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№21</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+
+    <p>
+        Задача 3. Розробити Класи<br>
+        Подумайте яким має бути спільний клас предок.<br>
+    </p>
+    <div id="container"></div>
+    <script>
+        const container = document.getElementById('container')
+
+        class Element {
+            constructor(x, y, imagePath) {
+                this.x = x
+                this.y = y
+                this.imagePath = imagePath
+                this.updateInterval = 0
+                this.imageId = `image_${Math.random().toString(36).substr(2, 9)}`
+            }
+
+            generateMarkup() {
+                return `<img id="${this.imageId}" src="${this.imagePath}" style="position: absolute; left: ${this.x}px; top: ${this.y}px;" />`
+            }
+
+            update(interval) {
+                this.updateInterval = interval
+                setInterval(() => {
+                    this.move()
+                    this.render()
+                }, this.updateInterval)
+            }
+
+            move() {
+                
+            }
+
+            render() {
+                const imageElement = document.getElementById(this.imageId)
+                if (imageElement) {
+                    imageElement.style.left = `${this.x}px`
+                    imageElement.style.top = `${this.y}px`
+                }
+            }
+        }
+
+        class House extends Element {
+            constructor(x, y, imagePath, scale) {
+                super(x, y, imagePath)
+                this.scale = scale
+            }
+
+            generateMarkup() {
+                return `<img id="${this.imageId}" src="${this.imagePath}" style="position: absolute; left: ${this.x}px; top: ${this.y}px; transform: scale(${this.scale});" />`
+            }
+
+            move() {
+                const direction = Math.random() < 0.5 ? -1 : 1
+                const step = (Math.random() * 0.1) + 0.01
+                this.scale += direction * step
+                const imageElement = document.getElementById(this.imageId)
+                if (imageElement) {
+                    imageElement.style.transform = `scale(${this.scale})`
+                }
+            }
+        }
+
+        class Dog extends Element {
+            constructor(x, y, imagePath) {
+                super(x, y, imagePath)
+            }
+
+            move() {
+                this.x += Math.floor(Math.random() * 100) - 50
+                this.y += Math.floor(Math.random() * 100) - 50
+            }
+        }
+
+        class Bird extends Element {
+            constructor(x, y, imagePath) {
+                super(x, y, imagePath)
+            }
+
+            move() {
+                this.x += Math.floor(Math.random() * 100) - 50
+                this.y += Math.floor(Math.random() * 100) - 50
+            }
+        }
+
+        const house = new House(400, 400, "house.png", 1)
+        const dog = new Dog(200, 200, "dog.png")
+        const bird = new Bird(300, 300, "bird.png")
+
+        container.innerHTML += house.generateMarkup()
+        container.innerHTML += dog.generateMarkup()
+        container.innerHTML += bird.generateMarkup()
+
+        house.update(1000)
+        dog.update(1000)
+        bird.update(1000)
+    </script>
+
+</body>
+
+</html>

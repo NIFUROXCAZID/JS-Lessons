@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№21</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Створити клас Client<br>
+        На основі цього класу створити клас GoldenClient<br>
+    </p>
+    <script>
+        class Client {
+            constructor(id, fullName, balance) {
+                this.id = id
+                this.fullName = fullName
+                this.balance = balance
+            }
+
+            deposit(amount) {
+                this.balance += amount
+            }
+
+            withdraw(amount) {
+                if (this.balance >= amount) {
+                    this.balance -= amount
+                } else {
+                    console.log("Insufficient funds")
+                }
+            }
+
+            toString() {
+                return `Client ID: ${this.id}, Full Name: ${this.fullName}, Balance: ${this.balance}`
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, fullName, balance, creditLimit, interestRate) {
+                super(id, fullName, balance)
+                this.creditLimit = creditLimit
+                this.interestRate = interestRate
+            }
+
+            calculatePenalty(amount) {
+                return amount * (this.interestRate / 100)
+            }
+
+            toString() {
+                return `${super.toString()}, Credit Limit: ${this.creditLimit}, Interest Rate: ${this.interestRate}%`
+            }
+        }
+
+        const client1 = new Client(1, "Juniver Maverick", 1000)
+        console.log(client1.toString())
+
+        const goldenClient1 = new GoldenClient(2, "Abella Amogus", 2000, 500, 5)
+        console.log(goldenClient1.toString())
+
+    </script>
+
+</body>
+
+</html>

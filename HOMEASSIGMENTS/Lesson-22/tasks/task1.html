@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№22</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 7. Дано список студентів (ім’я і дата народження: у формі тексту (день.місяць.рік). Знайти найстаршого студента<br>
+    </p>
+    <script>
+        class Student {
+            constructor(name, birthdate) {
+                this.name = name
+                this.birthdate = new Date(birthdate)
+            }
+        }
+
+        function findOldestStudent(students) {
+            if (students.length === 0) {
+                return null
+            }
+
+            let oldestStudent = students[0]
+            for (let i = 1; i < students.length; i++) {
+                if (students[i].birthdate < oldestStudent.birthdate) {
+                    oldestStudent = students[i]
+                }
+            }
+            return oldestStudent
+        }
+
+        const studentsData = [
+            { name: "Іван", birthdate: "2000-01-01" },
+            { name: "Марія", birthdate: "1998-05-15" },
+            { name: "Петро", birthdate: "1995-10-10" }
+        ]
+
+        const students = studentsData.map(student => new Student(student.name, student.birthdate))
+
+        const oldestStudent = findOldestStudent(students)
+        if (oldestStudent) {
+            console.log(`Найстарший студент: ${oldestStudent.name}, дата народження: ${oldestStudent.birthdate.toISOString().slice(0, 10)}`);
+        } else {
+            console.log("Список студентів порожній.")
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№21</title>
+</head>
+
+<body>
+    <h1>Задача 4</h1>
+    <p>
+        Задача 4. Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули)<br>
+        та оцінку (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку <br>
+        (якщо оцінка погана і це не останній місяць у семестрі) . Обробку усіх помилок зробити з використанням відповідних класів.<br>
+    </p>
+    <script>
+        class MonthError extends Error {
+            constructor(message) {
+                super(message)
+                this.name = this.constructor.name
+            }
+        }
+
+        class GradeError extends Error {
+            constructor(message) {
+                super(message)
+                this.name = this.constructor.name
+            }
+        }
+
+        function checkMonth(month) {
+            if (isNaN(month) || month < 1 || month > 12) {
+                throw new MonthError('Невірний місяць. Місяць повинен бути числом від 1 до 12.')
+            }
+        }
+
+        function checkGrade(grade, month) {
+            if (isNaN(grade) || grade < 1 || grade > 100) {
+                throw new GradeError('Невірна оцінка. Оцінка повинна бути числом від 1 до 100.')
+            }
+            if (grade < 60 && month < 12) {
+                throw new GradeError('Оцінка погана і це не останній місяць у семестрі. Можливо, потрібно виправити.')
+            }
+        }
+
+        function handleUserInput(month, grade) {
+            try {
+                checkMonth(month)
+                checkGrade(grade, month)
+                console.log('Виправлення оцінки не потрібно.')
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        handleUserInput(9, 55)
+        handleUserInput(12, 55)
+        handleUserInput(13, 90)
+        handleUserInput(6, 'abc')
+    </script>
+
+</body>
+
+</html>

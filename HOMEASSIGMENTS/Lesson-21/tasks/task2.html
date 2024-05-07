@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№21</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції<br>
+        ● Вивести всіх простих клієнтів;<br>
+        ● Вивести всіх клієнтів GoldenClient;<br>
+        ● Знайти сумарну кількість грошей на рахунку;<br>
+    </p>
+    <script>
+        class Client {
+            constructor(id, fullName, balance) {
+                this.id = id
+                this.fullName = fullName
+                this.balance = balance
+            }
+
+            deposit(amount) {
+                this.balance += amount
+            }
+
+            withdraw(amount) {
+                if (this.balance >= amount) {
+                    this.balance -= amount
+                } else {
+                    console.log("Insufficient funds")
+                }
+            }
+
+            toString() {
+                return `Client ID: ${this.id}, Full Name: ${this.fullName}, Balance: ${this.balance}`
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, fullName, balance, creditLimit, interestRate) {
+                super(id, fullName, balance)
+                this.creditLimit = creditLimit
+                this.interestRate = interestRate
+            }
+
+            calculatePenalty(amount) {
+                return amount * (this.interestRate / 100)
+            }
+
+            toString() {
+                return `${super.toString()}, Credit Limit: ${this.creditLimit}, Interest Rate: ${this.interestRate}%`
+            }
+        }
+
+        class Bank {
+            constructor() {
+                this.clients = [];
+            }
+
+            addClient(client) {
+                this.clients.push(client);
+            }
+
+            getAllClients() {
+                return this.clients;
+            }
+
+            getSimpleClients() {
+                return this.clients.filter(client => !(client instanceof GoldenClient));
+            }
+
+            getGoldenClients() {
+                return this.clients.filter(client => client instanceof GoldenClient);
+            }
+
+            getTotalBalance() {
+                return this.clients.reduce((total, client) => total + client.balance, 0);
+            }
+        }
+
+        // Приклад використання:
+        const bank = new Bank()
+
+        const client1 = new Client(1, "Abella Amogus", 1000)
+        const goldenClient1 = new GoldenClient(2, "Juniver Maverick", 2000, 500, 5)
+        const client2 = new Client(3, "Flinn Ronson", 1500)
+
+        bank.addClient(client1)
+        bank.addClient(goldenClient1)
+        bank.addClient(client2)
+
+        console.log("Simple Clients:")
+        console.log(bank.getSimpleClients())
+
+        console.log("\nGolden Clients:")
+        console.log(bank.getGoldenClients())
+
+        console.log("\nTotal Balance:", bank.getTotalBalance())
+
+    </script>
+
+</body>
+
+</html>

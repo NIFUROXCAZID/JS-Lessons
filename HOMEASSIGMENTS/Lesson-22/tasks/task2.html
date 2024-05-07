@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№22</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 3. Визначити скільки залишилось до кінця робочого дня (до 17.00)<br>
+    </p>
+    <script>
+        function timeUntilEndOfDay() {
+            const now = new Date();
+            const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0);
+            const timeLeft = endOfDay - now;
+
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            return `${hours} годин, ${minutes} хвилин, ${seconds} секунд`;
+        }
+
+        const timeLeft = timeUntilEndOfDay();
+        console.log(`Залишилось до кінця робочого дня: ${timeLeft}`);
+
+
+    </script>
+
+</body>
+
+</html>

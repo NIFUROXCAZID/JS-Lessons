@@ -37,72 +37,76 @@
     </p>
     <div id="container"></div>
     <script>
-        class Cockroach {
-            constructor(container) {
-                this.container = container
-                this.element = document.createElement('div')
-                this.element.classList.add('cockroach')
-                this.container.appendChild(this.element)
-
-                this.setPosition()
-                this.setDirection()
-                this.move()
-
-                this.element.addEventListener('click', this.sleep.bind(this))
+       class Element {
+            constructor(x, y, imagePath) {
+                this.x = x;
+                this.y = y;
+                this.imagePath = imagePath;
+                this.updateInterval = 0; // Початковий інтервал оновлення
             }
 
-            setPosition() {
-                const containerRect = this.container.getBoundingClientRect()
-                const maxX = containerRect.width - this.element.offsetWidth
-                const maxY = containerRect.height - this.element.offsetHeight
-
-                this.element.style.left = Math.random() * maxX + 'px'
-                this.element.style.top = Math.random() * maxY + 'px'
+            generateMarkup() {
+                return `<img src="${this.imagePath}" style="position: absolute; left: ${this.x}px; top: ${this.y}px;" />`;
             }
 
-            setDirection() {
-                this.dx = Math.random() > 0.5 ? 1 : -1
-                this.dy = Math.random() > 0.5 ? 1 : -1
+            update(interval) {
+                this.updateInterval = interval;
+                setInterval(() => {
+                    this.move();
+                    document.body.innerHTML = ''; // Очищаємо старі розмітки
+                    document.body.innerHTML += this.generateMarkup();
+                }, this.updateInterval);
             }
 
             move() {
-                this.intervalId = setInterval(() => {
-                    const containerRect = this.container.getBoundingClientRect()
-                    const elementRect = this.element.getBoundingClientRect()
-                    const maxX = containerRect.width - elementRect.width
-                    const maxY = containerRect.height - elementRect.height
-
-                    let newX = parseFloat(this.element.style.left) + this.dx * Math.random() * 5
-                    let newY = parseFloat(this.element.style.top) + this.dy * Math.random() * 5
-
-                    if (newX < 0 || newX > maxX) {
-                        this.dx *= -1
-                        newX = parseFloat(this.element.style.left) + this.dx * Math.random() * 5
-                    }
-
-                    if (newY < 0 || newY > maxY) {
-                        this.dy *= -1
-                        newY = parseFloat(this.element.style.top) + this.dy * Math.random() * 5
-                    }
-
-                    this.element.style.left = newX + 'px'
-                    this.element.style.top = newY + 'px'
-                }, 100)
-            }
-
-            sleep() {
-                clearInterval(this.intervalId)
-                this.element.classList.add('sleeping')
+                
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const container = document.getElementById('container')
-
-            for (let i = 0; i < 5; i++) {
-                new Cockroach(container)
+        class House extends Element {
+            constructor(x, y, imagePath, scale) {
+                super(x, y, imagePath)
+                this.scale = scale
             }
-        })
+
+            generateMarkup() {
+                return `<img src="${this.imagePath}" style="position: absolute; left: ${this.x}px; top: ${this.y}px; transform: scale(${this.scale});" />`;
+            }
+        }
+
+        class Dog extends Element {
+            constructor(x, y, imagePath) {
+                super(x, y, imagePath)
+            }
+
+            move() {
+                this.x += Math.floor(Math.random() * 100) - 50
+                this.y += Math.floor(Math.random() * 100) - 50
+            }
+        }
+
+        class Bird extends Element {
+            constructor(x, y, imagePath) {
+                super(x, y, imagePath)
+            }
+
+            move() {
+                this.x += Math.floor(Math.random() * 100) - 50
+                this.y += Math.floor(Math.random() * 100) - 50
+            }
+        }
+
+        const house = new House(100, 100, "house.png", 1)
+        const dog = new Dog(200, 200, "dog.png")
+        const bird = new Bird(300, 300, "bird.png")
+
+        document.body.innerHTML += house.generateMarkup()
+        document.body.innerHTML += dog.generateMarkup()
+        document.body.innerHTML += bird.generateMarkup()
+
+        house.update(2)
+        dog.update(2000)
+        bird.update(1000)
     </script>
 </body>
 
