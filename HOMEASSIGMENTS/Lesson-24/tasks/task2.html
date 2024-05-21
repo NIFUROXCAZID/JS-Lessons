@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№24</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 6. Дано масив книг (назва, рік видання, автор, ціна). Підрахувати загальну вартість книг для кожного із авторів.<br>
+    </p>
+    <script>
+        const books = [
+            { title: 'Book1', year: 2005, author: 'Author1', price: 15 },
+            { title: 'Book2', year: 2010, author: 'Author2', price: 20 },
+            { title: 'Book3', year: 2015, author: 'Author1', price: 25 },
+            { title: 'Book4', year: 2018, author: 'Author3', price: 30 },
+            { title: 'Book5', year: 2020, author: 'Author2', price: 35 },
+            { title: 'Book6', year: 2019, author: 'Author1', price: 40 }
+        ]
+
+        function calculateTotalPriceByAuthor(books) {
+            const authorPrices = new Map()
+
+            for (const book of books) {
+                if (!authorPrices.has(book.author)) {
+                    authorPrices.set(book.author, book.price)
+                } else {
+                    authorPrices.set(book.author, authorPrices.get(book.author) + book.price)
+                }
+            }
+
+            return authorPrices
+        }
+
+        const totalPriceByAuthor = calculateTotalPriceByAuthor(books)
+        console.log(totalPriceByAuthor)
+
+    </script>
+
+</body>
+
+</html>

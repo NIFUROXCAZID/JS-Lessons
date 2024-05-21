@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№24</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 5. Дано список URL адрес. Підрахувати кількість адрес, що відносяться до кожного із доменів (edu, com, org,...).<br>
+    </p>
+    <script>
+        const urls = [
+            'https://www.example.com/page1',
+            'https://sub.example.org/page2',
+            'https://www.site.edu/page3',
+            'https://blog.example.com/post',
+            'https://www.another-site.com/about',
+            'https://sub.example.com/article',
+            'https://www.some-site.org/contact',
+            'https://test.example.edu/home',
+            'https://www.example.com/about',
+            'https://sub.another-site.org/service',
+            'https://blog.site.com/blogpost',
+        ];
+
+        function countDomains(urls) {
+            const domainCount = {}
+
+            for (const url of urls) {
+                const domain = url.split('/')[2]
+
+                const domainPart = domain.split('.').pop()
+
+                if (!domainCount[domainPart]) {
+                    domainCount[domainPart] = 1
+                } else {
+                    domainCount[domainPart]++
+                }
+            }
+
+            return domainCount
+        }
+
+        const domainCounts = countDomains(urls)
+        console.log(domainCounts)
+
+    </script>
+
+</body>
+
+</html>

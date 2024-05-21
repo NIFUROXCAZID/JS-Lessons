@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№24</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 7. Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін).<br>
+        Підрахувати для кожного клієнта кількість відвідувань.<br>
+    </p>
+
+    <script>
+        const visitors = new Map()
+
+        visitors.set('user1', 5)
+        visitors.set('user2', 10)
+        visitors.set('user3', 8)
+        visitors.set('user4', 12)
+
+        for (const [user, visits] of visitors) {
+            console.log(`Користувач ${user} здійснив ${visits} відвідувань.`)
+        }
+
+    </script>
+
+</body>
+
+</html>

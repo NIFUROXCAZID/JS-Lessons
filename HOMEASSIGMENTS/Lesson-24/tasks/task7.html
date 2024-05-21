@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№24</title>
+</head>
+
+<body>
+    <h1>Задача 7</h1>
+    <p>
+        Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage).<br>
+        Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням confirm).<br>
+        Якщо користувач натискає на «Ок», то видаляти цю задачу.<br>
+    </p>
+
+    <script>
+        function saveTodoList(todoList) {
+            localStorage.setItem('todoList', JSON.stringify(todoList))
+        }
+
+        function getTodoList() {
+            const storedTodoList = localStorage.getItem('todoList')
+            return storedTodoList ? JSON.parse(storedTodoList) : []
+        }
+
+        function selectRandomTodo() {
+            const todoList = getTodoList()
+            const randomIndex = Math.floor(Math.random() * todoList.length)
+            return todoList[randomIndex]
+        }
+
+        function displayTodo() {
+            const randomTodo = selectRandomTodo()
+            if (!randomTodo) {
+                alert('Список справ порожній!')
+                return;
+            }
+            const confirmed = confirm(`Ваша наступна справа: ${randomTodo}. Ви впевнені, що хочете виконати цю справу?`)
+            if (confirmed) {
+                removeTodoFromList(randomTodo)
+                alert('Справа видалена!')
+            }
+        }
+
+        function removeTodoFromList(todo) {
+            const todoList = getTodoList()
+            const updatedTodoList = todoList.filter(item => item !== todo)
+            saveTodoList(updatedTodoList)
+        }
+
+        function addTodoToList(todo) {
+            const todoList = getTodoList()
+            todoList.push(todo)
+            saveTodoList(todoList)
+        }
+
+        addTodoToList('Подивитися новий фільм')
+        addTodoToList('Прибрати кімнату')
+        addTodoToList('Приготувати вечерю')
+
+        function displayTodo() {
+            const randomTodo = selectRandomTodo()
+            if (!randomTodo) {
+                alert('Список справ порожній!')
+                return;
+            }
+            const confirmed = confirm(`Ваша наступна справа: ${randomTodo}. Ви впевнені, що хочете виконати цю справу?`)
+            if (confirmed) {
+                removeTodoFromList(randomTodo)
+                alert('Справа видалена!')
+                setTimeout(displayTodo, 5000)
+            } else {
+                setTimeout(displayTodo, 5000)
+            }
+        }
+
+        setTimeout(displayTodo, 5000)
+
+
+    </script>
+
+</body>
+
+</html>

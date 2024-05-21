@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№25</title>
+</head>
+
+<body>
+    <h1>Задача 3</h1>
+    <p>
+        Задача 3. Створити генератор, який би випадковим чином поступово генерував вказану кількість парних чисел.<br>
+    </p>
+
+    <script>
+        function* generateEvenNumbers(count) {
+            let generatedCount = 0
+
+            while (generatedCount < count) {
+                const randomEvenNumber = Math.floor(Math.random() * 100) * 2
+                generatedCount++
+                yield randomEvenNumber
+            }
+        }
+
+        const count = 5
+        const evenNumbersGenerator = generateEvenNumbers(count)
+
+        for (const num of evenNumbersGenerator) {
+            console.log(num)
+        }
+
+    </script>
+
+</body>
+
+</html>

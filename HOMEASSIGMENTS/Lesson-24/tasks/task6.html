@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№24</title>
+</head>
+
+<body>
+    <h1>Задача 6</h1>
+    <p>
+        Задача 10 Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії.<br>
+        Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики.<br>
+        Також підрахувати скільки всього студентів відвідують хоча б один гурток.<br>
+    </p>
+    <script>
+        const mathStudents = ['Smith', 'Johnson', 'Williams', 'Jones']
+        const historyStudents = ['Brown', 'Davis', 'Miller', 'Wilson']
+
+        const historyInMathClub = new Map()
+
+        for (const student of historyStudents) {
+            historyInMathClub.set(student, false)
+        }
+
+        for (const student of mathStudents) {
+            if (historyInMathClub.has(student)) {
+                historyInMathClub.set(student, true)
+            }
+        }
+
+        let studentsInBothClubsCount = 0
+        for (const isPresent of historyInMathClub.values()) {
+            if (isPresent) {
+                studentsInBothClubsCount++
+            }
+        }
+
+        const totalStudentsCount = mathStudents.length + historyStudents.length - studentsInBothClubsCount
+
+        console.log(`Кількість студентів з гуртку з історії, які також відвідують гурток з математики: ${studentsInBothClubsCount}`)
+        console.log(`Загальна кількість студентів, які відвідують хоча б один гурток: ${totalStudentsCount}`)
+
+    </script>
+
+</body>
+
+</html>

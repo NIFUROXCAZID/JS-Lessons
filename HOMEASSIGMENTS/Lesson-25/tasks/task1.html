@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№25</title>
+</head>
+
+<body>
+    <h1>Задача 1</h1>
+    <p>
+        Задача 1. Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на основі номера виводиться оператор (050….  MTC, 096…  Kyivstar, ….)<br>
+    </p>
+    <script>
+        class PhoneNumber {
+            constructor(number) {
+                this.number = number
+            }
+
+            getOperator() {
+                const prefix = this.number.substring(0, 3)
+                switch (prefix) {
+                    case '050':
+                    case '066':
+                    case '095':
+                    case '099':
+                        return 'MTC'
+                    case '067':
+                    case '068':
+                    case '096':
+                    case '097':
+                    case '098':
+                        return 'Kyivstar'
+                    case '063':
+                    case '093':
+                        return 'Lifecell'
+                    default:
+                        return 'Unknown Operator'
+                }
+            }
+
+            toString() {
+                return `${this.number} (${this.getOperator()})`
+            }
+        }
+
+        const phone1 = new PhoneNumber('0501234567')
+        console.log(phone1.toString())
+
+        const phone2 = new PhoneNumber('0967654321')
+        console.log(phone2.toString())
+
+        const phone3 = new PhoneNumber('0631122334')
+        console.log(phone3.toString())
+
+    </script>
+
+</body>
+
+</html>

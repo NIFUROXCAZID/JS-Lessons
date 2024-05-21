@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DZ-№25</title>
+</head>
+
+<body>
+    <h1>Задача 2</h1>
+    <p>
+        Задача 2. Дано Shop -- клас, що містить список товарів (масив об’єктів класу Product (назва, ціна, кількість одиниць).<br>
+        Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок «товар-загальна вартість»<br>
+    </p>
+    <script>
+        class Product {
+            constructor(name, price, quantity) {
+                this.name = name
+                this.price = price
+                this.quantity = quantity
+            }
+
+            totalValue() {
+                return this.price * this.quantity
+            }
+        }
+
+        class Shop {
+            constructor() {
+                this.products = []
+            }
+
+            addProduct(product) {
+                this.products.push(product)
+            }
+
+            [Symbol.iterator]() {
+                let index = 0
+                const products = this.products
+
+                return {
+                    next() {
+                        if (index < products.length) {
+                            const product = products[index++]
+                            return {
+                                value: `${product.name} - ${product.totalValue()}`,
+                                done: false
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
+            }
+        }
+
+        const shop = new Shop();
+        shop.addProduct(new Product('Apple', 2, 10))
+        shop.addProduct(new Product('Orange', 3, 5))
+        shop.addProduct(new Product('Banana', 1, 7))
+
+        for (const item of shop) {
+            console.log(item)
+        }
+
+    </script>
+
+</body>
+
+</html>
